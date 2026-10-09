@@ -1,0 +1,4049 @@
+/* ==========================================================================
+   1. KHAI BÁO BIẾN CẤU HÌNH (COLOR VARIABLES & RESET)
+   ========================================================================== */
+:root {
+  /* 📌 [HƯỚNG DẪN SINH VIÊN]: Thay đổi màu sắc chủ đạo của trang web tại đây */
+  --bg-main: #0b0e17; /* Màu nền chính (Tối) */
+  --bg-card: rgba(22, 28, 42, 0.85); /* Màu nền thẻ nội dung */
+  --accent-gold: #e3c983; /* Màu vàng kim Genshin */
+  --accent-gold-hover: #f5e1a4; /* Màu vàng khi rê chuột */
+  --text-primary: #f0f2f5; /* Màu chữ chính */
+  --text-secondary: #a3a8b5; /* Màu chữ phụ */
+  --border-gold: rgba(227, 201, 131, 0.3);
+
+  /* Màu sắc đại diện cho 6 Nguyên Tố */
+  --element-anemo: #74e5ba;
+  --element-geo: #fab740;
+  --element-electro: #b088e8;
+  --element-dendro: #a5e246;
+  --element-hydro: #4cc2f8;
+  --element-pyro: #ef7a35;
+
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Khôi phục toàn bộ trang web mở rộng tràn 100% màn hình */
+html,
+body {
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden; /* Tránh hiện thanh cuộn ngang */
+}
+
+/* Custom Thanh Cuộn Trang Web */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--accent-gold);
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   2. THANH NAVIGATION (HEADER)
+   ========================================================================== */
+.navbar-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  background: rgba(11, 14, 23, 0.4);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-gold);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 66px; /* Chiều cao header của bạn (chỉnh lại đúng height thực tế nếu khác) */
+  padding-right: 0 !important; /* Cho nút Tải Game chạm sát mép phải màn hình */
+}
+
+.logo img {
+  height: 100px;
+  display: block;
+  transition: var(--transition);
+  mix-blend-mode: screen;
+}
+
+.logo img:hover {
+  transform: scale(1.05);
+}
+
+.nav-menu ul {
+  display: flex;
+  list-style: none;
+  gap: 24px;
+}
+
+.nav-menu a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 4px;
+  position: relative;
+  transition: var(--transition);
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+  color: var(--accent-gold);
+}
+
+.nav-menu a::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  height: 2px;
+  background: var(--accent-gold);
+  transition: var(--transition);
+}
+
+.nav-menu a:hover::after,
+.nav-menu a.active::after {
+  width: 100%;
+}
+
+/* Lối tắt Media (Video & Music) thay cho Tải Game */
+.header-media-actions {
+  display: flex;
+  align-items: center;
+  margin-right: 20px; /* Tạo khoảng cách giữa nút Music và nút Tải Game */
+}
+
+.btn-media {
+  padding: 8px 16px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: var(--transition);
+}
+
+.btn-video {
+  background: #e62117;
+  color: #fff;
+}
+
+.btn-music {
+  background: #1db954;
+  color: #fff;
+}
+
+.btn-media:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+/* ==========================================================================
+   CẤU HÌNH MENU DANH SÁCH BÀI HÁT (MUSIC DROPDOWN)
+   ========================================================================== */
+.music-dropdown-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.btn-music {
+  border: none;
+  cursor: pointer;
+}
+
+.arrow-icon {
+  font-size: 0.7rem;
+  margin-left: 4px;
+  transition: transform 0.3s ease;
+}
+
+/* Bảng Playlist xổ xuống */
+.music-playlist-dropdown {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  width: 280px;
+  background: rgba(18, 24, 36, 0.98);
+  border: 1px solid var(--border-gold);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(12px);
+
+  /* Ẩn mặc định */
+  display: none;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1001;
+}
+
+/* Hiển thị bảng danh sách khi có class .show */
+.music-playlist-dropdown.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.playlist-header {
+  padding: 12px 16px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--accent-gold);
+  border-bottom: 1px solid rgba(227, 201, 131, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.playlist-items {
+  list-style: none;
+  max-height: 250px;
+  overflow-y: auto;
+  padding: 6px 0;
+}
+
+.playlist-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.playlist-item i {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+}
+
+.song-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.song-title {
+  font-size: 0.85rem;
+  font-weight: bold;
+  color: var(--text-primary);
+}
+
+.song-artist {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Hiệu ứng Rê chuột & Bài hát đang phát */
+.playlist-item:hover {
+  background: rgba(227, 201, 131, 0.1);
+}
+
+.playlist-item.active {
+  background: rgba(227, 201, 131, 0.2);
+}
+
+.playlist-item.active .song-title,
+.playlist-item.active i {
+  color: var(--accent-gold);
+}
+
+/* =========================================================
+   1. STYLES CHO NÚT "TẢI GAME" TRÊN THANH NAVBAR
+   ========================================================= */
+.btn-download-header {
+  height: 100%; /* Phủ kín 100% chiều cao thanh điều hướng */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffc000; /* Màu vàng chuẩn Genshin */
+  color: #1a1a1a;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 0 35px; /* Độ rộng hai bên của nút Tải Game */
+  border: none;
+  border-radius: 0; /* Vuông vắn ôm trọn góc phải */
+  cursor: pointer;
+  transition: background-color 0.25s ease;
+  white-space: nowrap;
+  margin: 0;
+}
+
+.btn-download-header:hover {
+  background-color: #ffd447;
+}
+
+.btn-download-header:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   2. POPUP MODAL TẢI GAME (GIAO DIỆN PHONG CÁCH GENSHIN)
+   ========================================================= */
+
+/* Lớp nền mờ phủ toàn màn hình */
+.download-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.75); /* Nền đen trong suốt 75% */
+  backdrop-filter: blur(4px); /* Làm mờ nhẹ khung cảnh đằng sau */
+  z-index: 99999; /* Đảm bảo nằm đè lên trên tất cả mọi thứ */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Mặc định ẩn popup */
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s ease;
+}
+
+/* Khi class 'active' được thêm bằng JavaScript, popup sẽ hiện lên */
+.download-modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Khung hiển thị Popup chính */
+.download-modal-card {
+  background-color: #f5f0e6; /* Màu kem giao diện Genshin */
+  border: 2px solid #e2d7c5;
+  border-radius: 16px;
+  padding: 32px 40px;
+  width: 90%;
+  max-width: 820px;
+  position: relative;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+  transform: scale(0.9);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.download-modal-overlay.active .download-modal-card {
+  transform: scale(1); /* Hiệu ứng nảy nhẹ khi mở popup */
+}
+
+/* Nút đóng 'X' góc trên bên phải */
+.modal-close-btn {
+  position: absolute;
+  top: 16px;
+  right: 20px;
+  background: #ffffff;
+  border: 1px solid #d5c8b5;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 22px;
+  line-height: 1;
+  color: #495366;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.modal-close-btn:hover {
+  background: #495366;
+  color: #ffffff;
+  transform: rotate(90deg);
+}
+
+/* Tiêu đề "✦ Tải Game ✦" */
+.modal-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: 700;
+  color: #393b40;
+  margin-top: 0;
+  margin-bottom: 25px;
+}
+
+.modal-title .sparkle {
+  color: #cca468;
+  font-size: 20px;
+  margin: 0 6px;
+}
+
+/* Bố cục bên trong Popup (Chia 2 cột) */
+.modal-body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* Cột Mã QR */
+.qr-container {
+  flex: 0 0 160px;
+  background: #ffffff;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid #e0d5c1;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.qr-image {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Lưới 7 nút nền tảng */
+.download-platforms-grid {
+  flex: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Chia làm 2 cột đặn nhau */
+  gap: 12px;
+}
+
+/* Phong cách các nút Nền tảng (Màu đen viền tròn) */
+.platform-btn {
+  background-color: #000000;
+  color: #ffffff;
+  text-decoration: none;
+  border-radius: 8px;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 48px;
+  transition: all 0.2s ease;
+  border: 1px solid #222222;
+}
+
+.platform-btn:hover {
+  background-color: #222222;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.platform-icon {
+  height: 22px;
+  width: auto;
+  object-fit: contain;
+}
+
+/* Định dạng chữ bên trong nút nền tảng */
+.btn-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.2;
+}
+
+.text-sub {
+  font-size: 10px;
+  color: #aaaaaa;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.text-main {
+  font-size: 13px;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+/* Responsive cho màn hình nhỏ/Điện thoại */
+@media (max-width: 768px) {
+  .modal-body {
+    flex-direction: column;
+  }
+
+  .download-platforms-grid {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+
+  .download-modal-card {
+    padding: 24px 20px;
+  }
+}
+
+/* ==========================================================================
+   3. BANNER CHÍNH (HERO SECTION)
+   ========================================================================== */
+
+/* Khung chứa chính */
+.hero-section {
+  position: relative;
+  width: 100%;
+  max-width: 100% !important;
+  min-height: 100vh;
+  overflow: hidden; /* 🔑 Cắt sạch mọi phần video hay nội dung thừa tràn ra ngoài */
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* Căn đều 3 phần: trên, giữa, dưới */
+  align-items: center;
+  padding: 100px 20px 30px 20px;
+  box-sizing: border-box;
+  background-color: #000000;
+}
+
+/* Thẻ Video Nền nằm chìm hoàn toàn bên dưới */
+.hero-bg-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  transform: translate(-50%, -50%);
+  object-fit: cover; /* Phủ kín 100% màn hình (đổi thành 'contain' nếu muốn giữ tỉ lệ video gốc) */
+  z-index: 1;
+  pointer-events: none; /* Tránh cản trở thao tác click chuột */
+}
+
+/* Lớp phủ tối đè lên video (Tương tự hiệu ứng overlay) */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0); /* Chỉnh độ tối đè lên video (0.3 = 30% tối) */
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* Nâng độ cao cho Nội dung chữ & Thanh tải game nổi lên trên video */
+.hero-content,
+.hero-download-bar {
+  position: relative;
+  z-index: 10;
+}
+
+/* Câu chữ ở giữa */
+.hero-content {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px; /* Khoảng cách giữa tiêu đề và nút play */
+}
+
+.play-video-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  border: 2px solid rgba(255, 255, 255, 0.85);
+  box-shadow:
+    0 0 15px rgba(255, 255, 255, 0.3),
+    inset 0 0 10px rgba(255, 255, 255, 0.2);
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  margin-top: 10px;
+}
+
+/* Tam giác Play màu trắng ở giữa */
+.play-icon {
+  width: 0;
+  height: 0;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-left: 17px solid #ffffff; /* Mũi tên tam giác */
+  margin-left: 4px; /* Căn lùi nhẹ để tam giác cân đúng tâm hình tròn */
+  transition: all 0.3s ease;
+}
+
+/* Hiệu ứng Rê chuột (Hover) chuẩn Genshin: Phóng to + Phát sáng màu vàng kim */
+.play-video-btn:hover {
+  transform: scale(1.15);
+  background: rgba(227, 201, 131, 0.25);
+  border-color: #e3c983; /* Màu vàng kim Genshin */
+  box-shadow:
+    0 0 25px rgba(227, 201, 131, 0.8),
+    inset 0 0 15px rgba(227, 201, 131, 0.4);
+}
+
+.play-video-btn:hover .play-icon {
+  border-left-color: #e3c983; /* Đổi tam giác sang màu vàng kim */
+  transform: scale(1.1);
+}
+
+.hero-title {
+  font-size: 2.8rem;
+  color: #ffffff;
+  text-shadow:
+    0 0 15px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(241, 196, 15, 0.5);
+  font-weight: 800;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.hero-subtitle {
+  font-size: 1.2rem;
+  color: #f0f0f0;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+
+/* Thanh Tải Game Phía Dưới */
+.hero-download-bar {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  background: rgba(12, 12, 15, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 12px 18px;
+  border-radius: 10px;
+  max-width: 1150px;
+  width: 100%;
+  box-sizing: border-box;
+  background: transparent !important; /* Bỏ màu nền đen */
+  border: none !important; /* Bỏ đường viền màu trắng/xám xung quanh */
+  box-shadow: none !important; /* Bỏ bóng đổ */
+  backdrop-filter: none !important;
+}
+
+.hero-download-bar .age-rating,
+.hero-download-bar .warning-box,
+.hero-download-bar .hero-warning,
+.hero-download-bar > div:last-child {
+  /* Lựa chọn ô cuối cùng chứa cảnh báo 18+ */
+  background: rgba(12, 12, 15, 0.85) !important; /* Màn nền đen mờ */
+  border: 1px solid rgba(255, 255, 255, 0.2) !important; /* Viền xám sáng chuẩn Genshin */
+  border-radius: 8px !important; /* Bo góc nhẹ */
+  padding: 6px 12px !important;
+}
+
+/* 1. Căn giữa khung chứa mã QR và các nút tải game */
+.hero-download-bar {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex !important;
+  align-items: center;
+  gap: 12px;
+  z-index: 10;
+}
+
+/* 2. Chia lưới 4 cột cố định (Hàng 1 có 4 nút, Hàng 2 tự xuống dòng có 3 nút) */
+.download-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 145px) !important;
+  gap: 8px !important;
+}
+
+.download-grid .dl-btn:hover {
+  background: rgba(255, 255, 255, 0.15) !important;
+  border-color: #ffffff !important;
+}
+
+/* 4. QUAN TRỌNG: Khống chế kích thước ảnh logo vừa khít bên trong nút */
+.download-grid .dl-btn img {
+  max-height: 50px !important; /* Chiều cao tối đa của logo */
+  max-width: 100% !important; /* Chiều rộng không vượt quá nút */
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important; /* Giữ tỷ lệ ảnh, không bị méo */
+  display: block !important;
+}
+.dl-btn i {
+  font-size: 1.2rem;
+  color: #f1c40f;
+}
+
+.dl-btn:hover {
+  background: #f1c40f;
+  color: #111111;
+  border-color: #f1c40f;
+  transform: translateY(-2px);
+}
+
+.dl-btn:hover i {
+  color: #111111;
+}
+
+/* Mã QR và cảnh bảo */
+.hero-download-bar {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center;
+  gap: 14px !important; /* Khoảng cách vừa vặn giữa QR - Nút Tải - 18+ */
+  z-index: 10;
+}
+
+/* 2. Tăng kích thước ô QR Code (vuông 92px vừa khít chiều cao 2 hàng nút tải) */
+.qr-code-box {
+  width: 92px !important;
+  height: 92px !important;
+  flex-shrink: 0;
+  border-radius: 6px;
+  background: #ffffff;
+  padding: 3px;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+}
+
+.qr-code-box img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: contain;
+  display: block;
+}
+
+/* 3. Tăng kích thước Khung Cảnh Báo 18+ to và rõ nét */
+.warning-box {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  max-width: 200px;
+  color: #ffffff;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* Số 18+ to nổi bật */
+.warning-box .age-badge {
+  font-size: 34px !important;
+  font-weight: 800 !important;
+  color: #ffffff !important;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+/* Dòng chữ cảnh báo bên cạnh số 18+ */
+.warning-box p {
+  font-size: 11px !important;
+  line-height: 1.25 !important;
+  color: rgba(255, 255, 255, 0.95) !important;
+  margin: 0 !important;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   4. TIÊU ĐỀ SECTION CHUNG
+   ========================================================================== */
+section {
+  padding: 80px 20px;
+  max-width: 1250px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+/* 1. TIÊU ĐỀ CHÍNH (Dòng 372 - 376) */
+.section-title h2 {
+  font-size: 2.2rem;
+  color: var(--accent-gold);
+  letter-spacing: 1px;
+
+  /* 🔴 BỔ SUNG DÒNG NÀY: Tạo bóng đen đậm nét bao quanh chữ */
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    0 0 12px rgba(0, 0, 0, 0.9);
+}
+
+/* 2. DÒNG CHỮ NHỎ BÊN DƯỚI (Dòng 378 - 382) */
+.section-subtext {
+  color: #ffffff; /* Đổi sang màu trắng tinh cho nổi bật */
+  margin-top: 6px;
+  font-size: 0.95rem;
+
+  /* 🔴 BỔ SUNG DÒNG NÀY: Bóng đen giúp chữ nhỏ không bị chìm */
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.9),
+    0 0 8px rgba(0, 0, 0, 0.8);
+}
+
+.title-line {
+  width: 60px;
+  height: 3px;
+  background: var(--accent-gold);
+  margin: 12px auto 0;
+  border-radius: 2px;
+}
+/* ==========================================================
+   LÀM RÕ DÒNG CHỮ SUBTITLE BANNER (NƠI LƯU GIỮ NHỮNG HỒI ỨC)
+   ========================================================== */
+.hero-subtitle,
+#home-page p.hero-subtitle {
+  font-size: 1.5rem !important; /* 1. Tăng kích thước chữ to rõ */
+  font-weight: 600 !important; /* 2. Tăng độ dày chữ */
+  color: white !important; /* 3. Đổi sang màu vàng ánh kim chuẩn Genshin */
+
+  /* 4. Thêm bóng đen viền xung quanh chữ giúp nổi bật trên mọi hình nền sáng */
+  text-shadow:
+    2px 2px 6px rgba(0, 0, 0, 0.9),
+    0 0 12px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(0, 0, 0, 0.6) !important;
+
+  letter-spacing: 2px; /* 5. Giãn khoảng cách giữa các chữ cho thoáng */
+  margin-top: 10px; /* 6. Tạo khoảng cách nhẹ với dòng Tiêu đề trên */
+  margin-bottom: 25px; /* 7. Đẩy nút Play xuống dưới một chút */
+  text-transform: uppercase; /* (Tùy chọn) Viết hoa chữ để đồng bộ với tiêu đề */
+}
+/* ==========================================================================
+   5. KHU VỰC TIN TỨC (NEWS SECTION)
+   ========================================================================== */
+/* Khung bọc dàn hàng ngang 2 cột */
+.news-container {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 30px;
+  max-width: 1150px;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 20px;
+}
+
+/* Cột bên trái: Banner tin nổi bật */
+.news-featured {
+  flex: 1.2;
+  max-width: 620px;
+  background: rgba(15, 15, 20, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 10px;
+  overflow: hidden;
+  backdrop-filter: blur(8px);
+}
+
+.featured-img-wrapper {
+  position: relative;
+  width: 100%;
+  height: 320px;
+  overflow: hidden;
+}
+
+.featured-img-wrapper .banner-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.6s ease-in-out;
+  z-index: 1;
+}
+
+.featured-img-wrapper .banner-slide.active {
+  opacity: 1;
+  z-index: 2;
+}
+
+.featured-info {
+  padding: 18px 22px;
+  text-align: left;
+}
+
+.featured-info h3 {
+  color: #ffffff;
+  margin: 8px 0;
+  font-size: 1.2rem;
+}
+
+.featured-info p {
+  color: #cccccc;
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.banner-dots {
+  position: absolute;
+  bottom: 12px;
+  right: 15px;
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.45);
+  padding: 5px 10px;
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
+}
+
+.banner-dots .dot {
+  width: 8px;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.5);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.banner-dots .dot.active,
+.banner-dots .dot:hover {
+  background: #e3c983;
+  transform: scale(1.3);
+}
+
+/* Cột bên phải: Danh sách tin tức */
+.news-list {
+  flex: 1;
+  max-width: 480px;
+
+  /* 🔑 1. Giới hạn chiều cao & bật thanh cuộn dọc khi nhiều bài tin */
+  max-height: 420px; /* Chiều cao cố định bằng với khối banner bên trái */
+  overflow-y: auto; /* Tự động xuất hiện thanh trượt khi nội dung vượt quá max-height */
+  padding-right: 10px; /* Tạo khoảng trống để bài tin không bị đè lên thanh cuộn */
+
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+
+  /* Cấu hình khung đen mờ Genshin */
+  background: rgba(15, 15, 20, 0.75) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 10px;
+  padding: 20px;
+  box-sizing: border-box;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.news-item-tag {
+  color: #e3c983 !important; /* Màu vàng kim Genshin chuẩn */
+  font-weight: bold;
+  margin-right: 8px;
+  font-size: 0.95rem;
+  white-space: nowrap;
+}
+
+.news-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background: rgba(
+    255,
+    255,
+    255,
+    0.05
+  ); /* Lớp nền nhẹ trong suốt cho từng hàng */
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.news-item:hover,
+.news-item.active {
+  background: rgba(227, 201, 131, 0.18);
+  border-color: #e3c983;
+  transform: translateX(6px);
+}
+
+.news-item-title {
+  color: #ffffff;
+  font-size: 0.92rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+
+.news-item.active .news-item-title {
+  color: #e3c983;
+  font-weight: bold;
+}
+
+.news-item-date {
+  color: #aaaaaa;
+  font-size: 0.85rem;
+  margin-left: 10px;
+}
+/* Nút Tải Thêm ở Cột Phải Tin Tức Trang Chủ */
+.home-more-news-btn {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px 0;
+  background: rgba(255, 255, 255, 0.06);
+  color: #e3c99a;
+  border: 1px solid rgba(227, 201, 154, 0.3);
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.home-more-news-btn:hover {
+  background: rgba(227, 201, 154, 0.2);
+  color: #ffffff;
+  border-color: #e3c99a;
+  box-shadow: 0 0 10px rgba(227, 201, 154, 0.3);
+}
+/* ==========================================================
+   BACKGROUND HÌNH NỀN CHO KHU VỰC TIN TỨC
+   ========================================================== */
+
+.news-section {
+  position: relative;
+  width: 100%;
+  max-width: 100% !important;
+  min-height: 100vh;
+  padding: 60px 20px;
+
+  /* Hình nền background của bạn */
+  background-image: url("./Genshin.img/New_bg2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(11, 14, 23, 0.5);
+  background-blend-mode: overlay;
+  transition: background-image 0.5s ease-in-out;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Căn giữa tiêu đề và danh sách quốc gia */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(
+    0,
+    0,
+    0,
+    0.9
+  ); /* Chỉnh độ tối đè lên video (0.3 = 30% tối) */
+  z-index: 2;
+  pointer-events: none;
+}
+/* ==========================================================
+   FIX GIAO DIỆN TRANG TIN TỨC CHUYÊN SÂU (ÉP KHUNG ẢNH & NÚT BẤM)
+   ========================================================== */
+
+/* 1. Khung chứa toàn bộ trang Tin Tức (Đẩy xuống dưới Header) */
+#page-news {
+  padding-top: 110px !important; /* Tránh bị Header che */
+  padding-bottom: 60px !important;
+  min-height: 100vh;
+  background: #0c1017 !important; /* Nền tối chuẩn Genshin */
+  box-sizing: border-box;
+}
+
+.news-page-container {
+  max-width: 1200px !important;
+  margin: 0 auto !important;
+  padding: 0 20px !important;
+}
+
+/* 2. Sửa kiểu dáng các nút Tab Lọc Tin (Tất cả, Thông báo, Sự kiện...) */
+.news-filter-tabs {
+  display: flex !important;
+  gap: 12px !important;
+  margin-bottom: 30px !important;
+  flex-wrap: wrap;
+}
+
+.news-filter-tabs button,
+.filter-tab {
+  background: rgba(22, 29, 41, 0.9) !important;
+  border: 1px solid rgba(227, 201, 131, 0.4) !important;
+  color: #e3c983 !important;
+  padding: 8px 22px !important;
+  border-radius: 20px !important;
+  cursor: pointer !important;
+  font-size: 0.92rem !important;
+  transition: all 0.25s ease !important;
+  outline: none !important;
+}
+
+.news-filter-tabs button:hover,
+.filter-tab.active {
+  background: #e3c983 !important;
+  color: #111111 !important;
+  font-weight: bold !important;
+  box-shadow: 0 0 12px rgba(227, 201, 131, 0.5) !important;
+}
+
+/* 3. Khung Lưới 3 Cột chứa các thẻ tin tức */
+.news-full-grid {
+  display: grid !important;
+  grid-template-columns: repeat(
+    3,
+    1fr
+  ) !important; /* 🔑 Ép chia 3 cột đều nhau */
+  gap: 25px !important;
+  width: 100% !important;
+}
+
+/* 4. Thẻ Bài Tin Tức */
+.news-full-card {
+  background: rgba(18, 25, 36, 0.85) !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 10px !important;
+  overflow: hidden !important; /* 🔑 Cắt sạch phần ảnh thừa ra ngoài */
+  transition:
+    transform 0.3s,
+    border-color 0.3s,
+    box-shadow 0.3s !important;
+  backdrop-filter: blur(8px);
+}
+
+.news-full-card:hover {
+  transform: translateY(-6px) !important;
+  border-color: #e3c983 !important;
+  box-shadow: 0 10px 25px rgba(227, 201, 131, 0.2) !important;
+}
+
+/* 5. 🔑 QUAN TRỌNG NHẤT: Khung chứa ảnh và Ép ảnh gọn gàng */
+.news-card-thumb {
+  width: 100% !important;
+  height: 200px !important; /* 🔑 Giới hạn chiều cao khung ảnh 200px */
+  overflow: hidden !important;
+  position: relative !important;
+}
+
+.news-card-thumb img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; /* 🔑 Ép ảnh ôm khít khung không vỡ hay phình to */
+  display: block !important;
+}
+
+/* Nhãn loại tin (Thông báo / Sự kiện...) đè lên góc ảnh */
+.news-tag {
+  position: absolute !important;
+  top: 10px !important;
+  left: 10px !important;
+  background: rgba(227, 201, 131, 0.9) !important;
+  color: #111111 !important;
+  font-size: 0.75rem !important;
+  font-weight: bold !important;
+  padding: 3px 10px !important;
+  border-radius: 4px !important;
+  z-index: 2;
+}
+
+/* Phần nội dung chữ bên dưới ảnh */
+.news-card-body {
+  padding: 16px 18px !important;
+  color: #ffffff !important;
+}
+
+.news-card-body h3 {
+  font-size: 1.05rem !important;
+  margin-bottom: 8px !important;
+  color: #ffffff !important;
+  line-height: 1.4 !important;
+}
+
+.news-card-body p {
+  font-size: 0.88rem !important;
+  color: #aaaaaa !important;
+  line-height: 1.5 !important;
+  margin-bottom: 12px !important;
+}
+
+.news-date {
+  font-size: 0.8rem !important;
+  color: #777777 !important;
+}
+
+/* Responsive trên màn hình nhỏ */
+@media (max-width: 900px) {
+  .news-full-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
+@media (max-width: 600px) {
+  .news-full-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ==========================================================
+   6. KHU VỰC CÁC QUỐC GIA (NATIONS GRID) - TỐI ƯU CĂN GIỮA
+   ========================================================== */
+
+/* Khung cha bọc toàn bộ Section Quốc Gia */
+.nations-section {
+  position: relative;
+  width: 100%;
+  max-width: 100% !important;
+  min-height: 100vh;
+  padding: 60px 20px;
+
+  /* Hình nền background của bạn */
+  background-image: url("./Genshin.img/Background\ 1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-color: rgba(11, 14, 23, 0.5);
+  background-blend-mode: overlay;
+  transition: background-image 0.5s ease-in-out;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  /* Căn giữa tiêu đề và danh sách quốc gia */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Lưới 8 thẻ quốc gia (Căn giữa tuyệt đối - Chia 4 cột đều nhau) */
+.nations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 cột cân đối */
+  gap: 22px; /* Khoảng cách giữa các thẻ */
+  width: 100%;
+  max-width: 1240px; /* Khóa độ rộng chuẩn căn giữa */
+  margin: 0 auto; /* Căn giữa màn hình */
+  justify-content: center;
+}
+
+/* Thẻ từng quốc gia */
+.nation-card {
+  position: relative;
+  height: 220px; /* Chiều cao thẻ cân đối */
+  border-radius: 16px; /* Bo góc mượt */
+  overflow: hidden; /* Cắt góc giữ nhân vật trong lòng thẻ */
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.45);
+  transition:
+    transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+    box-shadow 0.35s ease,
+    border-color 0.35s ease;
+}
+
+/* Rê chuột vào: Thẻ nổi nhẹ lên & viền vàng phát sáng */
+.nation-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent-gold, #f1c40f);
+  box-shadow:
+    0 16px 32px rgba(0, 0, 0, 0.65),
+    0 0 18px rgba(255, 255, 255, 0.2);
+}
+
+/* Ảnh nền bối cảnh quốc gia */
+.nation-card img.nation-bg {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  transition: transform 0.6s ease;
+}
+
+.nation-card:hover img.nation-bg {
+  transform: scale(1.08);
+}
+
+/* Ảnh Nhân vật nằm ở góc phải bên trong thẻ */
+.nation-card .nation-char {
+  position: absolute;
+  right: -5px;
+  bottom: 0;
+  height: 92%;
+  width: auto !important;
+  object-fit: contain;
+  z-index: 2;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(25px);
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease;
+  filter: drop-shadow(0 0 10px rgba(0, 0, 0, 0.85));
+}
+
+.nation-card:hover .nation-char {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Khung thông tin chữ phía dưới chân thẻ */
+.nation-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 16px 18px;
+  background: linear-gradient(
+    0deg,
+    rgba(11, 14, 23, 0.95) 0%,
+    rgba(11, 14, 23, 0) 100%
+  );
+  z-index: 3;
+}
+
+/* Icon Nguyên Tố */
+.element-icon {
+  font-size: 0.85rem;
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 4px;
+  text-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.95),
+    0 0 8px rgba(0, 0, 0, 0.85);
+}
+
+.element-img,
+.element-icon img {
+  width: 50px !important;
+  height: 50px !important;
+  object-fit: contain !important;
+  display: inline-block !important;
+  filter: drop-shadow(0 0 3px rgba(0, 0, 0, 0.9));
+}
+
+/* Màu chữ tên nguyên tố chuẩn theo từng hệ */
+.nation-card[data-element="anemo"] .element-icon {
+  color: var(--element-anemo, #74e5ba);
+}
+.nation-card[data-element="geo"] .element-icon {
+  color: var(--element-geo, #fab855);
+}
+.nation-card[data-element="electro"] .element-icon {
+  color: var(--element-electro, #c680f3);
+}
+.nation-card[data-element="dendro"] .element-icon {
+  color: var(--element-dendro, #a5e043);
+}
+.nation-card[data-element="hydro"] .element-icon {
+  color: var(--element-hydro, #3ab1f9);
+}
+.nation-card[data-element="pyro"] .element-icon {
+  color: var(--element-pyro, #ef7a35);
+}
+.nation-card[data-element="cryo"] .element-icon {
+  color: #a0e9ff;
+}
+.nation-card[data-element="moon"] .element-icon {
+  color: #c0c0c0;
+}
+
+.nation-info h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 2px 0;
+  letter-spacing: 0.5px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9);
+}
+
+.nation-info p {
+  font-size: 0.82rem;
+  color: var(--text-secondary, #cbd5e1);
+  margin: 0;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+}
+
+/* Responsive khi xem trên màn hình nhỏ */
+@media (max-width: 1024px) {
+  .nations-grid {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 680px;
+  }
+}
+/* ==========================================================
+   CSS CHO POPUP MODAL CỐT TRUYỆN LỊCH TRÌNH LỮ HÀNH (FIX LỖI)
+   ========================================================== */
+
+/* 1. Nút 'Xem Chi Tiết' nằm bên trong từng thẻ Quốc Gia */
+.open-journey-btn {
+  margin-top: 10px;
+  padding: 6px 16px;
+  background: rgba(227, 201, 131, 0.15);
+  border: 1px solid #e3c983;
+  color: #e3c983;
+  border-radius: 14px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.open-journey-btn:hover {
+  background: #e3c983;
+  color: #111111;
+  box-shadow: 0 0 10px rgba(227, 201, 131, 0.6);
+}
+
+/* 2. Khung màn hình mờ đè lên toàn bộ trang web */
+.journey-modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.5) !important; /* Lớp nền đen mờ */
+  backdrop-filter: blur(8px); /* Làm mờ trang web đằng sau */
+  z-index: 9999 !important; /* Đẩy cao nhất màn hình */
+
+  /* 🔑 MẶC ĐỊNH ẨN HOÀN TOÀN (Ẩn đoạn chữ thô dưới chân trang) */
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+/* 🔑 KHI BẤM NÚT 'XEM CHI TIẾT' -> BẬT POPUP HIỆN LÊN */
+.journey-modal.open {
+  display: flex !important;
+}
+
+/* 3. Bảng hộp thoại chính giữa màn hình (Giao diện trong Game) */
+.journey-modal-content {
+  width: 90%;
+  max-width: 1000px;
+  background: rgba(20, 25, 35, 0.95);
+  border: 1.5px solid #e3c983; /* Viền vàng kim Genshin */
+  border-radius: 12px;
+  padding: 25px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.9);
+  box-sizing: border-box;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Thanh tiêu đề Modal */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  padding-bottom: 12px;
+  margin-bottom: 25px;
+}
+
+.modal-title {
+  color: #e3c983;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.modal-nation-tag {
+  color: #ffffff;
+  font-size: 1rem;
+  background: rgba(227, 201, 131, 0.2);
+  padding: 4px 16px;
+  border-radius: 15px;
+  border: 1px solid #e3c983;
+}
+
+.modal-close-btn {
+  background: none;
+  border: none;
+  color: #ffffff;
+  font-size: 1.8rem;
+  cursor: pointer;
+  line-height: 1;
+  transition: color 0.2s;
+}
+
+.modal-close-btn:hover {
+  color: #e3c983;
+}
+
+/* 4. Thanh chứa các thẻ Màn Cốt Truyện nằm ngang */
+.story-timeline-container {
+  display: flex;
+  align-items: center;
+  overflow-x: auto;
+  padding: 15px 5px;
+  gap: 15px;
+}
+
+/* Từng thẻ Màn Cốt Truyện */
+.story-card {
+  min-width: 230px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.story-card:hover {
+  border-color: #e3c983;
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(227, 201, 131, 0.3);
+}
+
+.story-img-box img {
+  width: 100%;
+  height: 130px;
+  object-fit: cover;
+  display: block;
+}
+
+.story-info {
+  padding: 12px;
+  text-align: left;
+}
+
+.story-info h4 {
+  color: #ffffff;
+  font-size: 0.92rem;
+  margin: 0 0 6px 0;
+}
+
+.story-act {
+  color: #e3c983;
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+/* Dây liên kết giữa các Màn */
+.story-line {
+  width: 35px;
+  height: 2px;
+  background: #e3c983;
+  flex-shrink: 0;
+}
+/* ==========================================================
+   7. TỐI ƯU THƯ VIỆN VIDEO VỚI ẢNH THUMBNAIL & NÚT PLAY
+   ========================================================== */
+
+#video-page,
+.video-section {
+  width: 100%;
+  min-height: 100vh; /* Phủ kín toàn bộ chiều cao màn hình */
+  padding-top: 100px !important; /* Đẩy nội dung xuống để KHÔNG BỊ HEADER CHE */
+  padding-bottom: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+
+  /* Hình nền ảnh với lớp phủ tối mờ chuẩn Genshin */
+  background:
+    linear-gradient(rgba(15, 23, 42, 0.75), rgba(15, 23, 42, 0.75)),
+    url("./Genshin.img/Background_4.jpg") no-repeat center center / cover !important;
+
+  border-top: 1px solid rgba(241, 196, 15, 0.3);
+  border-bottom: 1px solid rgba(241, 196, 15, 0.3);
+}
+.video-grid {
+  display: grid !important;
+  grid-template-columns: repeat(4, 1fr) !important; /* Ép chia 4 cột đều nhau */
+  gap: 16px !important;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.video-card {
+  background: rgba(15, 23, 42, 0.85);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5);
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease;
+  position: relative;
+}
+
+.video-card:hover {
+  transform: translateY(-5px);
+  border-color: #f1c40f;
+}
+
+.video-thumb-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  padding-top: 56.25%; /* Tỷ lệ 16:9 chuẩn */
+  overflow: hidden;
+  background: #000;
+}
+
+/* Định dạng cho thumbnail YouTube */
+.video-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+/* Định dạng cho Video MP4 phát trực tiếp */
+.video-thumb-wrapper video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Nút Play màu đỏ nổi bật */
+.play-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 44px;
+  height: 44px;
+  background: rgba(220, 38, 38, 0.9);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  box-shadow: 0 0 12px rgba(220, 38, 38, 0.6);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.video-card h3 {
+  padding: 10px 8px;
+  font-size: 0.82rem;
+  color: #ffffff;
+  text-align: center;
+  margin: 0;
+  font-weight: 600;
+}
+
+/* ==========================================================
+   VI. TRANG MÃ QUÀ ĐỘC LẬP (GIFT PAGE SECTION)
+   ========================================================== */
+#gift-page,
+.gift-section {
+  width: 100%;
+  min-height: 100vh; /* Phủ kín chiều cao màn hình */
+  padding-top: 100px !important; /* Đẩy nội dung xuống KHÔNG BỊ HEADER CHE */
+  padding-bottom: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+  box-sizing: border-box;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  /* 1. Hình nền ảnh */
+  background:
+    linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.5)),
+    url("./Genshin.img/Background\ 5.jpg") no-repeat center center / cover;
+
+  /* 2. CỐ ĐỊNH HÌNH NỀN KHÔNG TRÔI THEO THANH CUỘN */
+  background-attachment: fixed !important;
+
+  border-top: 1px solid rgba(241, 196, 15, 0.3);
+  border-bottom: 1px solid rgba(241, 196, 15, 0.3);
+}
+/* Khung màu trắng chính giữa trang */
+.gift-box {
+  background: #ffffff;
+  width: 100%;
+  max-width: 760px;
+  border-radius: 18px;
+  padding: 40px 30px;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+  border: 2px solid #f1c40f;
+  text-align: center;
+  color: #1e293b;
+}
+
+.gift-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #0f172a;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gift-subtitle {
+  font-size: 0.88rem;
+  color: #64748b;
+  margin-bottom: 28px;
+}
+
+/* Danh sách xếp dọc các ô mã quà (CÓ THANH TRƯỢT KHI THÊM NHIỀU MÃ) */
+.gift-code-list {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 28px;
+
+  /* 🟢 BẬT KHUNG CUỘN KHI CÓ NHIỀU MÃ QUÀ */
+  max-height: 300px; /* Chiều cao tối đa (hiển thị vừa đẹp ~3 mã quà) */
+  overflow-y: auto; /* Tự động hiện thanh trượt khi vượt quá 300px */
+  padding-right: 8px; /* Khoảng trống để thanh trượt không đè lên chữ */
+}
+
+/* 🎨 TRANG TRÍ THANH TRƯỢT (SCROLLBAR) VÀNG KIM GENSIN */
+.gift-code-list::-webkit-scrollbar {
+  width: 6px;
+}
+
+.gift-code-list::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 10px;
+}
+
+.gift-code-list::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+  transition: background 0.2s ease;
+}
+
+.gift-code-list::-webkit-scrollbar-thumb:hover {
+  background: #f1c40f;
+}
+
+/* Ô mã quà */
+.gift-code-card {
+  background: #f8fafc;
+  border: 1.5px dashed #cbd5e1;
+  border-radius: 12px;
+  padding: 14px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.25s ease;
+}
+
+.gift-code-card:hover {
+  border-color: #f1c40f;
+  background: #fffdf0;
+  transform: translateY(-2px);
+}
+
+.code-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4px;
+}
+
+.code-text {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: 1.2px;
+  font-family: monospace, sans-serif;
+}
+
+.code-reward {
+  font-size: 0.82rem;
+  color: #d97706;
+  font-weight: 600;
+}
+
+/* Nút "Nhập giftcode tại đây" ở cuối khung */
+.gift-action {
+  margin-top: 10px;
+}
+
+.btn-redeem-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 36px;
+  background: linear-gradient(135deg, #f1c40f 0%, #d97706 100%);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  border-radius: 30px;
+  box-shadow: 0 6px 18px rgba(217, 119, 6, 0.35);
+  transition: all 0.3s ease;
+}
+
+.btn-redeem-link:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 10px 24px rgba(217, 119, 6, 0.5);
+  background: linear-gradient(135deg, #f39c12 0%, #b45309 100%);
+}
+/* ==========================================================
+   TIÊU ĐỀ VÀNG KIM DỊU CHUẨN ĐỒNG BỘ TOÀN TRANG
+   ========================================================== */
+.section-title {
+  text-align: center;
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+/* Sử dụng lại biến màu var(--accent-gold) cho vàng dịu mắt */
+.section-title h2 {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--accent-gold, #e0c078) !important;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.8);
+  margin-bottom: 10px;
+}
+
+/* Thanh gạch chân vàng kim mờ dịu */
+.title-line {
+  width: 60px;
+  height: 3px;
+  background: var(--accent-gold, #e0c078) !important;
+  margin: 0 auto;
+  border-radius: 2px;
+  box-shadow: 0 0 6px rgba(224, 192, 120, 0.4);
+}
+/* ==========================================================
+   XỬ LÝ HIỂN THỊ CĂN GIỮA TRANG MÃ QUÀ ĐỘC LẬP
+   ========================================================== */
+#gift-page {
+  width: 100%;
+  min-height: 100vh;
+  padding-top: 100px !important; /* Đẩy nội dung xuống bên dưới Header cố định */
+  padding-bottom: 60px;
+  box-sizing: border-box;
+}
+
+#gift-page.active {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+/* ==========================================================================
+   9. TRÌNH PHÁT NHẠC CỐ ĐỊNH (FLOATING AUDIO PLAYER)
+   ========================================================================== */
+.floating-audio-player {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 999;
+  background: rgba(18, 24, 36, 0.95);
+  border: 1px solid var(--accent-gold);
+  border-radius: 30px;
+  padding: 8px 16px 8px 8px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px);
+}
+
+.player-icon {
+  width: 36px;
+  height: 36px;
+  background: var(--accent-gold);
+  color: #000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+}
+/* Tạo hiệu ứng xoay tròn 360 độ */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Thêm class playing - khi có class này đĩa nhạc sẽ xoay liên tục */
+.player-icon.playing {
+  animation: spin 8s linear infinite; /* 4s là tốc độ xoay (càng nhỏ xoay càng nhanh) */
+}
+
+.player-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.track-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.track-title {
+  font-size: 0.8rem;
+  font-weight: bold;
+  color: #fff;
+}
+
+.track-artist {
+  font-size: 0.7rem;
+  color: var(--text-secondary);
+}
+
+#playPauseBtn {
+  background: transparent;
+  border: 1px solid var(--accent-gold);
+  color: var(--accent-gold);
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+}
+
+#playPauseBtn:hover {
+  background: var(--accent-gold);
+  color: #000;
+}
+
+/* ==========================================================================
+   10. FOOTER & THÔNG TIN BÀI TẬP NHÓM
+   ========================================================================== */
+.site-footer {
+  width: 100%;
+  background-color: #0b0b0d;
+  color: #cccccc;
+  font-family: inherit;
+}
+
+/* 1. Thanh Mạng Xã Hội */
+.footer-social-bar {
+  background-color: #1a1a1e;
+  padding: 16px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.social-icons {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+  flex-wrap: wrap;
+}
+
+.social-icons a {
+  color: #999999;
+  font-size: 1.3rem;
+  transition:
+    color 0.3s ease,
+    transform 0.2s ease;
+  text-decoration: none;
+}
+
+.social-icons a:hover {
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+/* 2. Khu Vực Đăng Ký Nhận Thông Tin */
+.footer-subscribe-section {
+  background-color: #141417;
+  padding: 40px 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.subscribe-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.subscribe-text {
+  flex: 1;
+  min-width: 280px;
+}
+
+.subscribe-text h3 {
+  font-size: 1.5rem;
+  color: #ffffff;
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.subscribe-text p {
+  font-size: 0.85rem;
+  color: #8a8a93;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.subscribe-form-wrapper {
+  flex: 1;
+  min-width: 300px;
+  max-width: 480px;
+}
+
+.subscribe-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.input-group {
+  display: flex;
+  gap: 12px;
+}
+
+.input-group input[type="email"] {
+  flex: 1;
+  padding: 12px 16px;
+  background-color: #222228;
+  border: 1px solid #33333d;
+  border-radius: 6px;
+  color: #ffffff;
+  font-size: 0.9rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.input-group input[type="email"]:focus {
+  border-color: #f1c40f;
+}
+
+.btn-subscribe {
+  padding: 12px 24px;
+  background-color: #ebd090;
+  color: #111111;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.9rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color 0.3s ease,
+    transform 0.2s ease;
+}
+
+.btn-subscribe:hover {
+  background-color: #f1c40f;
+  transform: translateY(-1px);
+}
+
+.subscribe-policy {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: #777780;
+  line-height: 1.4;
+  cursor: pointer;
+}
+
+.subscribe-policy input[type="checkbox"] {
+  margin-top: 2px;
+  accent-color: #f1c40f;
+}
+
+.subscribe-policy a {
+  color: #aaaab3;
+  text-decoration: underline;
+}
+
+/* 3. Chân Trang Chính */
+.footer-main {
+  background-color: #08080a;
+  padding: 40px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+}
+
+.footer-logo {
+  max-width: 140px;
+  height: auto;
+  opacity: 0.85;
+}
+
+.footer-policy-links {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 0.88rem;
+}
+
+.footer-policy-links a {
+  color: #8a8a93;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.footer-policy-links a:hover {
+  color: #ffffff;
+}
+
+.footer-policy-links .divider {
+  color: #44444d;
+}
+
+.hoyoverse-brand {
+  font-size: 1.3rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #ffffff;
+}
+
+.footer-copyright p {
+  font-size: 0.8rem;
+  color: #666670;
+  margin: 4px 0 0 0;
+}
+
+/* Tự động co dãn trên điện thoại */
+@media (max-width: 768px) {
+  .subscribe-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .input-group {
+    flex-direction: column;
+  }
+  .btn-subscribe {
+    width: 100%;
+  }
+}
+/* ==========================================================
+   CSS CHO NÚT TỰ ĐỘNG CHUYỂN BÀI HÁT Ở CUỐI PLAYLIST
+   ========================================================== */
+.playlist-footer {
+  padding: 10px 12px 6px 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin-top: 8px;
+  text-align: center;
+}
+
+.btn-auto-next {
+  width: 100%;
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #aaaaaa;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.25s ease;
+}
+
+/* Trạng thái BẬT (Màu vàng kim Genshin) */
+.btn-auto-next.active {
+  background: rgba(241, 196, 15, 0.15);
+  color: #f1c40f;
+  border-color: rgba(241, 196, 15, 0.5);
+  box-shadow: 0 0 8px rgba(241, 196, 15, 0.2);
+}
+
+.btn-auto-next:hover {
+  background: rgba(241, 196, 15, 0.25);
+  color: #ffffff;
+  border-color: #f1c40f;
+}
+/* ==========================================================
+   ÉP TOÀN BỘ TRANG WEB & VIDEO NỀN TRÀN 100% MÀN HÌNH
+   ========================================================== */
+
+/* 1. Reset lề và độ rộng toàn trang */
+html,
+body {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+  overflow-x: hidden !important;
+  background-color: #000000 !important; /* Màu nền đen nguyên bản */
+}
+/* ==========================================================
+   TẠO KHUNG POPUP TRONG SUỐT VÀI VIỀN VÀNG KIM CHUẨN GENSHIN
+   ========================================================== */
+
+/* 1. Lớp nền bao phủ xung quanh: Giảm độ đen để thấy rõ trang web đằng sau */
+.nation-info-modal {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  background: rgba(0, 0, 0, 0.45) !important; /* 🔑 Nền đen mờ nhẹ hơn */
+  backdrop-filter: blur(6px) !important; /* Làm mờ nhẹ bối cảnh đằng sau */
+  z-index: 99999 !important;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.nation-info-modal.open {
+  display: flex !important;
+}
+
+/* 2. Khung thoại chính: TRONG SUỐT XUYÊN THẤU + VIỀN VÀNG KIM GENSHIN */
+.nation-info-content {
+  position: relative !important;
+  width: 90% !important;
+  max-width: 660px !important;
+  max-height: 82vh !important; /* Cố định chiều cao để hiện thanh trượt */
+
+  /* 🔑 NỀN TRONG SUỐT XUYÊN THẤU (Giảm Alpha xuống 0.55) */
+  background: rgba(12, 17, 26, 0.55) !important;
+  backdrop-filter: blur(16px) saturate(130%) !important; /* Hiệu ứng kính mờ trong suốt cao cấp */
+
+  /* 🔑 VIỀN VÀNG KIM GENSHIN + PHÁT SÁNG NHẸ (GOLD GLOW) */
+  border: 1.5px solid #e3c983 !important;
+  box-shadow:
+    0 0 25px rgba(227, 201, 131, 0.3),
+    0 20px 50px rgba(0, 0, 0, 0.8) !important;
+
+  border-radius: 10px !important;
+  padding: 25px 30px !important;
+  color: #ffffff !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+}
+
+/* 3. Thanh tiêu đề trên cùng */
+.modal-nation-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.modal-nation-header span {
+  font-size: 1.15rem;
+  color: #e3c983 !important; /* 🔑 Tên quốc gia đổi sang màu vàng kim */
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-shadow: 0 0 8px rgba(227, 201, 131, 0.4);
+}
+
+.modal-close-x {
+  background: none;
+  border: none;
+  color: #cccccc;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1;
+}
+
+.modal-close-x:hover {
+  color: #e3c983; /* Rê chuột vào đổi màu vàng */
+  transform: scale(1.15);
+}
+
+/* 4. Vùng chứa nội dung cuộn chuột */
+.modal-nation-body {
+  overflow-y: auto !important;
+  padding-right: 12px !important;
+  flex: 1;
+}
+
+/* 🔑 THANH TRƯỘT VÀNG KIM TÔNG-XUYỆN-TÔNG GENSHIN */
+.modal-nation-body::-webkit-scrollbar {
+  width: 5px !important; /* Thanh trượt siêu mảnh 5px */
+}
+
+.modal-nation-body::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05) !important;
+  border-radius: 4px;
+}
+
+.modal-nation-body::-webkit-scrollbar-thumb {
+  background: rgba(
+    227,
+    201,
+    131,
+    0.6
+  ) !important; /* Con trượt màu vàng kim mờ */
+  border-radius: 4px;
+  box-shadow: 0 0 6px rgba(227, 201, 131, 0.4);
+}
+
+.modal-nation-body::-webkit-scrollbar-thumb:hover {
+  background: #e3c983 !important; /* Rê chuột vào sáng rực màu vàng */
+}
+
+/* Tiêu đề địa danh (Đảo Narukami, Bờ Biển Falcon...) */
+.modal-nation-body h2 {
+  font-size: 1.65rem;
+  color: #ffffff;
+  margin: 5px 0 10px 0;
+  font-weight: 600;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+/* 🔑 DƯỜNG GẠCH NGHẠNG VÀNG KIM NỔI BẬT */
+.spot-title-line {
+  width: 100%;
+  height: 1.5px;
+  background: linear-gradient(
+    90deg,
+    #e3c983 0%,
+    rgba(227, 201, 131, 0.1) 100%
+  ) !important;
+  margin-bottom: 18px;
+}
+
+/* Đoạn văn bản giới thiệu */
+.modal-nation-body p {
+  color: #f0f0f0;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  margin-bottom: 20px;
+  text-align: justify;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.8);
+}
+
+/* Khung viền ảnh địa danh bên dưới */
+.modal-spot-img-box {
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(227, 201, 131, 0.3) !important; /* Viền ảnh màu vàng mờ */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+  margin-bottom: 10px;
+}
+
+.modal-spot-img-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+/* Khoảng cách giữa các địa danh trong cùng 1 quốc gia */
+.spot-block {
+  margin-bottom: 35px;
+}
+
+.spot-block:last-child {
+  margin-bottom: 10px;
+}
+/* PHẦN SECTION TRANG CHỦ TRÀN 100% TOÀN BỘ MÀN HÌNH */
+#home-page {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+}
+/* ==========================================================
+   KHẮC PHỤC HOÀN HẢO FONT CHỮ & MÀU VÀNG KIM TRANG CHỦ (#home-page)
+   ========================================================== */
+
+/* 1. Sửa lỗi Font tiếng Việt hiển thị sắc nét, không bị gập nét */
+#home-page,
+#home-page * {
+  font-family:
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif !important;
+}
+
+/* 2. Sửa nhãn "Bản tin" / "Thông tin" trên góc ảnh preview bên trái */
+#home-page .news-preview .tag,
+#home-page .news-left .tag,
+#home-page .news-banner .tag,
+#home-page .tag-badge {
+  position: absolute !important;
+  top: 15px !important;
+  left: 15px !important;
+  background: #e6c15c !important; /* Vàng kim Genshin */
+  color: #121824 !important; /* Chữ tối nổi bật */
+  font-weight: 700 !important;
+  padding: 3px 10px !important;
+  border-radius: 4px !important;
+  font-size: 0.78rem !important;
+  z-index: 10 !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5) !important;
+}
+
+/* 3. Khung bài viết bình thường (chưa chọn) bên danh sách phải */
+#home-page .news-item {
+  background: rgba(20, 24, 32, 0.6) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
+  border-radius: 6px !important;
+  margin-bottom: 8px !important;
+  padding: 10px 14px !important;
+  transition: all 0.25s ease !important;
+}
+
+/* Nhãn [Thông báo], [Thông tin], [Bản tin] bài viết chưa chọn */
+#home-page .news-item .tag,
+#home-page .news-item span:first-child {
+  color: #ffd97d !important; /* Vàng nhạt */
+  font-weight: 600 !important;
+  background: rgba(255, 255, 255, 0.08) !important;
+  padding: 2px 8px !important;
+  border-radius: 4px !important;
+  font-size: 0.8rem !important;
+}
+
+/* Tiêu đề bài viết chưa chọn -> Chữ xám trắng sáng rõ */
+#home-page .news-item h3,
+#home-page .news-item a,
+#home-page .news-item .title,
+#home-page .news-item span:nth-child(2) {
+  color: #d1d5db !important;
+  font-weight: 500 !important;
+  font-size: 0.88rem !important;
+}
+
+/* Ngày tháng bài viết chưa chọn */
+#home-page .news-item .date,
+#home-page .news-item-date,
+#home-page .news-item span:last-child {
+  color: #8a94a6 !important;
+  font-size: 0.8rem !important;
+}
+
+/* 4. KHI BÀI VIẾT ĐƯỢC CHỌN (ACTIVE) HOẶC HOVER BẤM VÀO */
+#home-page .news-item.active,
+#home-page .news-item:hover {
+  background: rgba(35, 42, 56, 0.9) !important;
+  border: 1px solid #f3e5ab !important; /* Viền vàng kim */
+  box-shadow: 0 0 12px rgba(243, 229, 171, 0.25) !important;
+}
+
+/* TIÊU ĐỀ BÀI VIẾT ACTIVE -> NỔI BẬT MÀU VÀNG KIM GENSHIN */
+#home-page .news-item.active h3,
+#home-page .news-item.active a,
+#home-page .news-item.active .title,
+#home-page .news-item.active span:nth-child(2),
+#home-page .news-item:hover h3,
+#home-page .news-item:hover a,
+#home-page .news-item:hover .title,
+#home-page .news-item:hover span:nth-child(2) {
+  color: #f3e5ab !important; /* MÀU VÀNG KIM CHUẨN */
+  font-weight: 700 !important;
+}
+
+/* Nhãn khi Active -> Nền vàng kim chữ tối */
+#home-page .news-item.active .tag,
+#home-page .news-item.active span:first-child,
+#home-page .news-item:hover .tag,
+#home-page .news-item:hover span:first-child {
+  background: #f3e5ab !important;
+  color: #121824 !important;
+  font-weight: 700 !important;
+}
+
+/* Ngày tháng khi Active */
+#home-page .news-item.active .date,
+#home-page .news-item.active span:last-child,
+#home-page .news-item:hover .date {
+  color: #ffffff !important;
+}
+/* ==========================================================
+   II. CSS CHO TRANG TIN TỨC ĐỘC LẬP (#news-page)
+   ========================================================== */
+
+/* 1. Khung chứa toàn bộ trang Tin Tức */
+#news-page {
+  width: 100%;
+  min-height: 100vh;
+  padding: 120px 20px 60px 20px; /* Padding top để không bị Header che */
+  background: radial-gradient(
+    circle at center,
+    rgba(30, 41, 59, 0.9) 0%,
+    rgba(15, 23, 42, 0.98) 100%
+  );
+  box-sizing: border-box;
+}
+
+.news-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Tiêu đề trang Tin Tức */
+.news-page-title {
+  text-align: center;
+  font-size: 2.2rem;
+  color: #f3e5ab; /* Vàng kim nhạt Genshin */
+  text-shadow: 0 0 10px rgba(243, 229, 171, 0.3);
+  margin-bottom: 30px;
+  letter-spacing: 2px;
+}
+
+/* 2. Thanh bộ lọc (Filter Bar: Tất cả, Sự kiện, Thông tin...) */
+.news-filter-bar {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(243, 229, 171, 0.3);
+  color: #ccc;
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: #f3e5ab;
+  color: #121824;
+  font-weight: bold;
+  border-color: #f3e5ab;
+  box-shadow: 0 0 12px rgba(243, 229, 171, 0.4);
+}
+
+/* 3. Lưới hiển thị các thẻ bài viết (Grid Layout) */
+.news-page-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 28px;
+}
+
+/* 4. Thẻ bài viết (News Card) */
+.news-page-card {
+  background: rgba(18, 24, 36, 0.85);
+  border: 1px solid rgba(243, 229, 171, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
+}
+
+.news-page-card:hover {
+  transform: translateY(-8px);
+  border-color: rgba(243, 229, 171, 0.6);
+  box-shadow:
+    0 10px 25px rgba(0, 0, 0, 0.5),
+    0 0 15px rgba(243, 229, 171, 0.15);
+}
+
+/* Khung ảnh thumbnail */
+.news-card-thumb {
+  position: relative;
+  width: 100%;
+  height: 190px;
+  overflow: hidden;
+}
+
+.news-card-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.news-page-card:hover .news-card-thumb img {
+  transform: scale(1.08); /* Phóng to nhẹ ảnh khi hover */
+}
+
+/* Tag nhãn (Sự kiện / Thông tin) đè lên ảnh */
+.news-card-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: rgba(18, 24, 36, 0.85);
+  color: #f3e5ab;
+  border: 1px solid rgba(243, 229, 171, 0.5);
+  font-size: 0.75rem;
+  font-weight: bold;
+  padding: 4px 10px;
+  border-radius: 4px;
+  backdrop-filter: blur(4px);
+}
+
+/* Thân bài viết */
+.news-card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.news-card-body h3 {
+  font-size: 1.15rem;
+  color: #fff;
+  margin: 0 0 10px 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2; /* Giới hạn tối đa 2 dòng tiêu đề */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.news-card-body p {
+  font-size: 0.9rem;
+  color: #aaa;
+  line-height: 1.5;
+  margin: 0 0 20px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Giới hạn tối đa 3 dòng mô tả */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Chân thẻ (Ngày tháng & Nút xem thêm) */
+.news-card-footer {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.news-card-date {
+  font-size: 0.8rem;
+  color: #888;
+}
+
+.news-read-more {
+  color: #f3e5ab;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: bold;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.news-read-more:hover {
+  color: #fff;
+  transform: translateX(4px);
+}
+/* 1. Mặc định ẨN tất cả các trang nội dung */
+/* Ẩn triệt để tất cả các trang nếu không có class active */
+.page-section {
+  display: none !important;
+}
+
+/* Chỉ hiển thị trang đang kích hoạt */
+.page-section.active {
+  display: block !important;
+}
+/* ==========================================================
+   SỬA LỖI CHE TIÊU ĐỀ TRANG TIN TỨC
+   ========================================================== */
+#news-page {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+
+  /* Tăng padding-top lên 150px để đẩy Tiêu đề ra khỏi thanh Header */
+  padding-top: 150px !important;
+  padding-bottom: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  /* Background ảnh nền */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.65), rgba(15, 23, 42, 0.5)),
+    url("Genshin_country.img/Monstard3.jpg") no-repeat center center / cover;
+  background-attachment: fixed;
+}
+
+/* Đảm bảo khung chữ nổi lên trên background */
+.news-page-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2; /* Nổi chữ lên lớp màng tối */
+}
+/* ==========================================================
+   CSS CHO DANH SÁCH TIN TỨC HÀNG NGANG & NÚT TẢI THÊM
+   ========================================================== */
+
+.news-page-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+/* Khung thẻ bài viết nằm ngang */
+.news-list-item {
+  display: flex;
+  background: rgba(255, 255, 255, 0.95); /* Nền sáng nhạt như web gốc */
+  border-radius: 6px;
+  overflow: hidden;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+  text-decoration: none;
+  color: #333;
+}
+
+.news-list-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Ảnh thumbnail bên trái */
+.news-item-thumb {
+  width: 220px;
+  min-width: 220px;
+  height: 125px;
+}
+
+.news-item-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Nội dung thông tin bên phải */
+.news-item-content {
+  flex: 1;
+  padding: 14px 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-item-title {
+  font-size: 1.1rem;
+  color: #222;
+  margin: 0 0 8px 0;
+  font-weight: 600;
+}
+
+.news-item-desc {
+  font-size: 0.88rem;
+  color: #666;
+  margin: 0;
+  line-height: 1.4;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Ngày tháng và tag ở góc dưới bên phải */
+.news-item-meta {
+  margin-top: auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: 16px;
+  font-size: 0.85rem;
+}
+
+.news-item-date {
+  color: #999;
+}
+
+.news-item-tag {
+  color: #bfa15f; /* Màu vàng kim Genshin */
+  font-weight: 500;
+}
+
+/* Style cho nút Tải Thêm */
+.load-more-wrapper {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.load-more-btn {
+  width: 100%;
+  padding: 14px 0;
+  background: #4a4e58; /* Tông xám đậm chuẩn Genshin */
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition:
+    background 0.3s ease,
+    transform 0.1s ease;
+}
+
+.load-more-btn:hover {
+  background: #383b43;
+}
+
+.load-more-btn:active {
+  transform: scale(0.99);
+}
+/* ==========================================================
+    NÚT TẢI THÊM 
+   ========================================================== */
+.load-more-wrapper {
+  text-align: center;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.load-more-btn {
+  background: rgba(18, 24, 36, 0.85);
+  color: #f3e5ab; /* Vàng kim Genshin */
+  border: 1px solid rgba(243, 229, 171, 0.4);
+  padding: 12px 42px;
+  border-radius: 25px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.load-more-btn:hover {
+  background: #f3e5ab;
+  color: #121824;
+  box-shadow: 0 0 15px rgba(243, 229, 171, 0.4);
+  transform: translateY(-2px);
+}
+/* ==========================================================
+   CSS TRANG CHI TIẾT TIN TỨC GIAO DIỆN KHUNG TRẮNG 2 CỘT
+   ========================================================== */
+
+/* 1. Khung chứa chính */
+.news-detail-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* 2. Thanh Điều Hướng (Breadcrumb & Nút Trở Về) */
+.news-detail-nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 0.9rem;
+}
+
+.news-breadcrumb a {
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.news-breadcrumb a:hover {
+  color: #f3e5ab; /* Màu vàng kim Genshin */
+}
+
+.news-breadcrumb span {
+  color: #f3e5ab;
+}
+
+.back-to-news-link {
+  color: #f3e5ab;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.back-to-news-link:hover {
+  text-decoration: underline;
+  transform: translateX(-3px);
+}
+
+/* 3. Bố cục 2 Cột chính */
+.news-detail-layout {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+/* --- CỘT TRÁI (LỚN): KHUNG TRẮNG NỘI DUNG CHÍNH --- */
+.news-detail-main-card {
+  flex: 1;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 35px 40px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  color: #333333;
+}
+
+.detail-main-title {
+  font-size: 1.75rem;
+  color: #1a1a1a;
+  margin: 0 0 10px 0;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.detail-meta-time {
+  font-size: 0.88rem;
+  color: #888888;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eeeeee;
+}
+
+.detail-image-box {
+  width: 100%;
+  margin-bottom: 20px;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.detail-image-box img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.detail-body-content p {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  color: #444444;
+  margin-bottom: 20px;
+}
+/* Khung chứa Video Thumbnail YouTube cho trang Chi Tiết */
+.detail-video-box {
+  width: 100%;
+  margin-top: 20px;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.detail-video-box .video-thumb-wrapper {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.detail-video-box .video-thumb {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.3s ease;
+}
+
+/* Hiệu ứng phóng to nhẹ ảnh thumbnail khi di chuột vào */
+.detail-video-box .video-thumb-wrapper:hover .video-thumb {
+  transform: scale(1.02);
+}
+/* --- CỘT PHẢI (NHỎ): SIDEBAR BÀI MỚI --- */
+.news-detail-sidebar-card {
+  width: 320px;
+  min-width: 320px;
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.sidebar-title {
+  font-size: 1.1rem;
+  color: #222222;
+  margin: 0 0 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #f0f0f0;
+  text-align: center;
+  font-weight: 700;
+}
+
+.sidebar-news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.sidebar-news-item {
+  display: flex;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f5f5f5;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.sidebar-news-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.sidebar-news-item:hover {
+  transform: translateX(3px);
+}
+
+.sidebar-news-item img {
+  width: 90px;
+  height: 55px;
+  object-fit: cover;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+
+.sidebar-news-info h4 {
+  font-size: 0.85rem;
+  color: #222222;
+  margin: 0 0 5px 0;
+  font-weight: 600;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sidebar-news-info span {
+  font-size: 0.75rem;
+  color: #999999;
+}
+
+/* Đáp ứng màn hình nhỏ (Mobile & Tablet) */
+@media (max-width: 900px) {
+  .news-detail-layout {
+    flex-direction: column;
+  }
+  .news-detail-sidebar-card {
+    width: 100%;
+    min-width: 100%;
+  }
+  /* Đảm bảo các trang mặc định đều bị ẩn */
+  .page-section,
+  #news-detail-page {
+    display: none !important;
+  }
+
+  /* Chỉ hiển thị duy nhất trang nào có class .active */
+  .page-section.active,
+  #news-detail-page.active {
+    display: block !important;
+  }
+}
+#news-detail-page {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box;
+
+  /* Tăng padding-top lên 150px để đẩy Tiêu đề ra khỏi thanh Header */
+  padding-top: 150px !important;
+  padding-bottom: 60px;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  /* Background ảnh nền */
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.65), rgba(15, 23, 42, 0.5)),
+    url("Genshin.img/Background 5.jpg") no-repeat center center / cover;
+  background-attachment: fixed;
+}
+/* ==========================================================
+   1. CSS MENU THẢ XUỐNG (DROPDOWN MENU) Ở HEADER
+   ========================================================== */
+.nav-item.dropdown {
+  position: relative;
+}
+
+.nav-item.dropdown:hover .dropdown-menu {
+  display: block;
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  background: rgba(18, 22, 31, 0.95);
+  border: 1px solid rgba(227, 201, 154, 0.3);
+  border-radius: 4px;
+  padding: 8px 0;
+  min-width: 150px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  display: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.25s ease;
+  z-index: 1000;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 18px;
+  color: #cccccc;
+  font-size: 14px;
+  text-decoration: none;
+  text-align: center;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+}
+
+.dropdown-item:hover {
+  background: rgba(227, 201, 154, 0.15);
+  color: #e3c99a;
+}
+
+.nav-arrow {
+  font-size: 11px;
+  margin-left: 4px;
+  transition: transform 0.2s ease;
+}
+
+.nav-item.dropdown:hover .nav-arrow {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================
+   III. CSS TRANG GIỚI THIỆU GAME (#game-intro-page)
+   ========================================================== */
+#game-intro-page {
+  background: #0b0e14;
+  color: #ffffff;
+  padding-bottom: 60px;
+}
+
+/* 2.1 Hero Banner Poster */
+.game-intro-hero {
+  position: relative;
+  width: 100%;
+  max-height: 520px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-poster-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  filter: brightness(0.85);
+}
+
+.hero-poster-text {
+  position: absolute;
+  bottom: 40px;
+  text-align: center;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9);
+}
+
+.hero-poster-text h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.hero-poster-text p {
+  font-size: 15px;
+  color: #e3c99a;
+}
+
+/* Tiêu đề mục dùng chung */
+.section-title-center {
+  text-align: center;
+  font-size: 36px;
+  color: #ffffff;
+  margin: 50px 0 30px 0;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+/* 2.2 Khối Tính Năng Đặc Sắc */
+.game-features-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.feature-card {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  background: rgba(15, 20, 30, 0.6);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Khung chữ thiết kế phong cách Cuộn Giấy Cổ Điển Genshin */
+.feature-scroll-box {
+  flex: 1;
+  background: #f4efe4; /* Màu kem giấy cuộn */
+  color: #333333;
+  padding: 35px 30px;
+  border: 3px double #cbb181; /* Viền kép vàng đồng */
+  border-radius: 6px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+}
+
+.feature-scroll-box h3 {
+  font-size: 22px;
+  color: #222222;
+  margin-bottom: 15px;
+  font-weight: 700;
+}
+
+.feature-scroll-box p {
+  font-size: 14px;
+  line-height: 1.6;
+  color: #555555;
+}
+
+/* Khung hình ảnh bên phải */
+.feature-img-box {
+  flex: 1.4;
+  max-height: 320px;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.feature-img-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Nút Vàng "Xem Nhân Vật" */
+.view-characters-btn-wrapper {
+  text-align: center;
+  margin: 40px 0 60px 0;
+}
+
+.btn-yellow-large {
+  background: #f3bf31;
+  color: #111111;
+  border: none;
+  padding: 14px 48px;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  box-shadow: 0 4px 12px rgba(243, 191, 49, 0.3);
+}
+
+.btn-yellow-large:hover {
+  background: #ffd65d;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(243, 191, 49, 0.5);
+}
+
+/* 2.3 Khối Đồ Họa (Slider) */
+.game-graphics-container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.graphics-slider {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.graphics-slide-wrapper {
+  width: 100%;
+  max-height: 500px;
+  overflow: hidden;
+  border-radius: 8px;
+  border: 1px solid rgba(227, 201, 154, 0.3);
+}
+
+.graphics-slide-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Mũi tên chuyển slide */
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  width: 44px;
+  height: 60px;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 5;
+  transition: all 0.2s ease;
+}
+
+.slider-arrow:hover {
+  background: rgba(243, 191, 49, 0.8);
+  color: #111111;
+}
+
+.arrow-left {
+  left: 10px;
+}
+.arrow-right {
+  right: 10px;
+}
+/* Quy định ẩn tất cả các trang nội dung */
+.page-section {
+  display: none;
+}
+
+/* Chỉ hiện trang nào đang có class active */
+.page-section.active {
+  display: block !important;
+}
+/* ==========================================================
+   CSS BẢO ĐẢM BANNER VIDEO GAME INTRO TRAN TRÀN MAX MÀN HÌNH
+   ========================================================== */
+/* 1. Ép thanh Header nổi tự do đè lên trên video (không chiếm diện tích) */
+header,
+.header,
+.navbar-header,
+.site-header {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 1000 !important;
+  background: rgba(0, 0, 0, 0.4) !important; /* Lớp nền mờ nhẹ mượt mà */
+}
+
+/* 2. Xóa bỏ hoàn toàn lề thừa của trang Giới Thiệu Game */
+#game-intro-page {
+  margin: 0 !important;
+  padding: 0 !important;
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* 3. Khung Hero đúng bằng 100% chiều cao màn hình (100vh) */
+.game-intro-hero {
+  position: relative !important;
+  width: 100% !important;
+  height: 100vh !important; /* Đúng tròn 100% chiều cao màn hình trình duyệt */
+  margin: 0 !important;
+  padding: 0 !important; /* Xóa bỏ padding làm đẩy khung */
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* 4. Video phủ kín tràn cả 4 góc */
+.hero-video-bg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important; /* Tự co giãn vừa khít màn hình không bị méo */
+  z-index: 1 !important;
+}
+
+/* 5. Chữ căn chính giữa tâm màn hình */
+.game-intro-hero .hero-poster-text {
+  position: absolute !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  z-index: 2 !important;
+  text-align: center !important;
+  width: 90% !important;
+  max-width: 900px !important;
+}
+
+/* ==========================================================
+   TỐI ƯU CHỮ NỔI BẬT TRÊN VIDEO NỀN ĐỘNG (KHÔNG LỚP PHỦ)
+   ========================================================== */
+
+/* 1. Tiêu đề chính: "Đồng Loạt Ra Mắt Toàn Cầu..." */
+.game-intro-hero .hero-poster-text h1 {
+  color: #ffffff !important;
+  font-size: 42px !important;
+  font-weight: 800 !important;
+  letter-spacing: 1px !important;
+  line-height: 1.3 !important;
+  margin-bottom: 16px !important;
+
+  /* Đổ bóng chữ 3 lớp đè lên nhau để chữ luôn nổi dù nền video sáng hay tối */
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    0 4px 12px rgba(0, 0, 0, 0.8),
+    0 0 20px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* 2. Dòng thời gian: "9:00 28/09/2020 (GMT+7)" */
+.game-intro-hero .hero-poster-text p {
+  color: #ffe094 !important; /* Màu vàng kim đặc trưng Genshin */
+  font-size: 20px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.5px !important;
+
+  /* Đổ bóng sắc nét cho dòng thời gian */
+  text-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.9),
+    0 0 10px rgba(0, 0, 0, 0.8) !important;
+}
+/* ==========================================================
+   BACKGROUND CỐ ĐỊNH CHUNG CHO CẢ TÍNH NĂNG & ĐỒ HỌA
+   ========================================================== */
+.game-features-wrapper {
+  position: relative;
+  width: 100%;
+  padding: 60px 0;
+  box-sizing: border-box;
+
+  /* 1. Đường dẫn ảnh nền của bạn */
+  background-image: url("Gioi_Thieu_game.img/background 2.png");
+
+  /* 2. Ghim cố định ảnh nền khi cuộn chuột */
+  background-attachment: fixed !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  background-size: cover !important;
+}
+#graphicsCurrentImg {
+  transition: opacity 0.3s ease-in-out;
+  width: 100%;
+  border-radius: 12px;
+  display: block;
+}
+/* ==========================================================
+   IV. CSS TRANG NHÂN VẬT CHUẨN GENSIN IMPACT (CHARACTERS PAGE)
+   ========================================================== */
+
+/* 1. Khung tổng quát toàn trang Nhân Vật */
+#characters-page {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  background-color: #0c1220;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  transition: background-image 0.5s ease-in-out;
+  padding-top: 80px; /* Tránh bị Header che */
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.characters-container {
+  display: flex;
+  width: 100%;
+  max-width: 1400px;
+  height: calc(100vh - 100px);
+  margin: 0 auto;
+  position: relative;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* 2. THANH ĐIỀU HƯỚNG QUỐC GIA BÊN TRÁI (SIDEBAR) */
+.nations-sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+}
+
+.nation-nav-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+}
+
+.nation-nav-item {
+  color: rgba(255, 255, 255, 0.65);
+  font-size: 18px;
+  font-weight: 600;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nation-nav-item .diamond-icon {
+  font-size: 12px;
+  opacity: 0;
+  color: #e3c99a;
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.nation-nav-item:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.nation-nav-item.active {
+  color: #ffe094;
+  font-weight: 700;
+  background: rgba(227, 201, 154, 0.15);
+  border-left: 3px solid #e3c99a;
+}
+
+.nation-nav-item.active .diamond-icon,
+.nation-nav-item:hover .diamond-icon {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+/* 3. KHU VỰC HIỂN THỊ CHÍNH (MAIN CONTENT) */
+.character-main-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  z-index: 5;
+}
+
+.character-display-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(100% - 110px);
+  position: relative;
+}
+
+/* Bảng tên & Mô tả ngắn bên trái */
+/* 1. Xóa sạch nền, viền, bóng đổ của khung chứa */
+.character-info-card {
+  width: 420px;
+  background: transparent !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  position: relative;
+  z-index: 5 !important;
+}
+
+/* 2. Tên nhân vật nổi bẩy sắc nét với bóng đổ đen gắt */
+.character-info-card h1 {
+  color: #ffffff !important;
+  font-size: 42px !important;
+  font-weight: 800 !important;
+  margin: 0 0 10px 0 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  text-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.9),
+    0 0 20px rgba(0, 0, 0, 0.9) !important;
+}
+
+/* 3. Thanh gạch ngang màu vàng kim */
+.char-title-line {
+  width: 60px;
+  height: 3px;
+  background: #e3c99a !important;
+  margin-bottom: 20px;
+  border-radius: 2px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* 4. Đoạn văn mô tả rõ nét trên mọi nền ảnh */
+.char-description-box p {
+  color: #ffffff !important;
+  font-size: 16px !important;
+  line-height: 1.7 !important;
+  margin: 0 !important;
+  font-weight: 500 !important;
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.95),
+    0 0 15px rgba(0, 0, 0, 0.8) !important;
+}
+
+/* Ảnh minh họa Splash Art bên phải */
+.characters-container {
+  position: relative !important;
+  height: calc(100vh - 80px) !important;
+}
+
+/* 2. Đưa khung chứa ảnh nhân vật ghim trực tiếp xuống mép dưới cùng */
+/* 1. Mốc tọa độ chính toàn trang */
+#characters-page {
+  position: relative !important;
+  min-height: 100vh !important;
+}
+
+.characters-container {
+  position: relative !important;
+  height: calc(100vh - 80px) !important;
+  overflow: hidden !important;
+}
+
+/* 2. Bỏ mốc tọa độ thẻ cha trung gian để ảnh thoát khỏi bị nhốt */
+.character-main-content,
+.character-display-box {
+  position: static !important; /* Bắt buộc static để ảnh tìm tọa độ của .characters-container */
+  height: 100% !important;
+}
+
+/* 3. Ghim ảnh nhân vật SÁT MÉP DƯỚI CÙNG (.characters-container) */
+.character-splash-box {
+  position: absolute !important;
+  right: 2% !important; /* Căn lề bên phải */
+  bottom: 0 !important; /* DÍNH SÁT ĐÉC MÉP DƯỚI TRANG */
+  height: 90vh !important; /* Chiều cao phóng to gần tới Header */
+  max-height: calc(100vh - 80px) !important;
+  display: flex !important;
+  align-items: flex-end !important; /* Đặt chân nhân vật đứng ở mép đáy */
+  justify-content: center !important;
+  z-index: 2 !important; /* Nằm dưới thanh Avatar */
+  pointer-events: none !important;
+}
+
+/* 4. Định dạng ảnh nhân vật đứng chân sát đáy */
+.character-splash-box img {
+  height: 100% !important;
+  width: auto !important;
+  max-height: 100% !important;
+  max-width: none !important;
+  object-fit: contain !important;
+  object-position: bottom center !important; /* Chốt chân ảnh xuống đáy */
+  filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.7));
+}
+
+/* 5. Đưa thanh chọn Avatar nổi đè lên trên chân nhân vật */
+.character-avatar-bar {
+  position: absolute !important;
+  bottom: 20px !important;
+  left: 50% !important;
+  transform: translateX(-50%) !important;
+  z-index: 10 !important;
+}
+.avatar-arrow {
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  color: #ffffff;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+}
+
+.avatar-arrow:hover {
+  background: #e3c99a;
+  color: #000000;
+}
+
+.avatar-list-wrapper {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.char-avatar-card {
+  width: 65px;
+  height: 65px;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.05);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.char-avatar-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.char-avatar-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(227, 201, 154, 0.7);
+}
+
+.char-avatar-card.active {
+  border-color: #e3c99a;
+  box-shadow: 0 0 12px rgba(227, 201, 154, 0.6);
+  transform: translateY(-4px) scale(1.05);
+}
+/* ==========================================================
+   TỐI ƯU BACKGROUND FULL MÀN HÌNH CHO TRANG NHÂN VẬT
+   ========================================================== */
+#characters-page {
+  position: relative;
+  width: 100%;
+  max-width: 100% !important;
+  min-height: 100vh;
+  padding: 60px 20px;
+}
+
+/* Khung chứa nội dung bên trong mở rộng linh hoạt theo màn hình */
+.characters-container {
+  display: flex;
+  width: 100% !important;
+  max-width: 100% !important; /* Xóa bỏ giới hạn 1400px để không bị thắt khung */
+  height: calc(100vh - 80px);
+  margin: 0 auto;
+  position: relative;
+  padding: 20px 50px; /* Tạo khoảng trống 2 bên lề cho đẹp mắt */
+  box-sizing: border-box;
+}
+/* ==========================================================
+   ĐẨY BẢNG THÔNG TIN VÀ NÚT ĐIỀU HƯỚNG NỔI LÊN TRÊN ẢNH NHÂN VẬT
+   ========================================================== */
+
+/* 1. Bảng tên & mô tả nhân vật nổi lên lớp cao nhất */
+.character-info-card {
+  position: relative !important;
+  z-index: 10 !important; /* Đặt cao hơn z-index: 2 của ảnh nhân vật */
+}
+
+/* 2. Cột menu danh sách quốc gia bên trái cũng nổi lên trên */
+.nations-sidebar {
+  position: relative !important;
+  z-index: 10 !important;
+}
+/* ==========================================================
+   PHÓNG TO VÀ TẠO KIỂU Ô CHỌN NHÂN VẬT (CHUẨN GENSHIN GỐC)
+   ========================================================== */
+
+/* 1. Căn giữa danh sách các thẻ ở đáy màn hình */
+.character-avatar-bar,
+#avatarListContainer {
+  display: flex !important;
+  gap: 14px !important; /* Khoảng cách giữa các ô */
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 10 !important;
+}
+
+/* 2. Phóng to từng ô thẻ nhân vật (Kích thước chữ nhật đứng hoành tráng) */
+.char-avatar-card {
+  width: 90px !important; /* Chiều rộng ô */
+  height: 115px !important; /* Chiều cao ô */
+  background: rgba(
+    18,
+    25,
+    38,
+    0.8
+  ) !important; /* Nền xanh đen tối chuẩn game */
+  border: 2px solid rgba(255, 255, 255, 0.25) !important;
+  border-radius: 8px !important;
+  overflow: hidden !important;
+  cursor: pointer !important;
+  position: relative !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  transition:
+    transform 0.25s ease,
+    border-color 0.25s ease,
+    box-shadow 0.25s ease !important;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Hiệu ứng phóng nhẹ khi nêm chuột vào ô */
+.char-avatar-card:hover {
+  transform: translateY(-6px) scale(1.05) !important;
+  border-color: #e3c99a !important; /* Viền vàng kim khi hover */
+  box-shadow: 0 10px 22px rgba(227, 201, 154, 0.35) !important;
+}
+
+/* Thẻ đang được CHỌN (ACTIVE) nổi bật hẳn lên */
+.char-avatar-card.active {
+  border-color: #ffffff !important;
+  background: rgba(30, 42, 62, 0.95) !important;
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.7) !important;
+  transform: scale(1.08) !important;
+}
+
+/* 3. Phóng to hình ảnh đại diện nhân vật bên trong ô */
+.char-avatar-card img {
+  width: 100% !important;
+  height: 85px !important;
+  object-fit: cover !important;
+  object-position: top center !important;
+}
+
+/* 4. Định dạng dải tên nhân vật ở đáy ô */
+.char-avatar-card span,
+.char-avatar-card .char-name-label {
+  width: 100% !important;
+  height: 28px !important;
+  background: rgba(10, 15, 25, 0.85) !important;
+  color: #e2e8f0 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+/* Tên của nhân vật ĐANG CHỌN chuyển sang nền trắng chữ đen gắt */
+.char-avatar-card.active span,
+.char-avatar-card.active .char-name-label {
+  background: #ffffff !important;
+  color: #111111 !important;
+  font-weight: 700 !important;
+}
+/* ==========================================================
+   KHUNG GIỚI THIỆU MỜ KÍNH VÀ THANH TRƯỢT CHUẨN GENSHIN GỐC
+   ========================================================== */
+
+/* 1. Khung tổng thể chứa thông tin nhân vật */
+.character-info-card {
+  width: 450px !important;
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* 2. Tên nhân vật màu trắng sáng có bóng đổ */
+.character-info-card h1 {
+  color: #ffffff !important;
+  font-size: 42px !important;
+  font-weight: 800 !important;
+  letter-spacing: 2px !important;
+  text-transform: uppercase !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.9) !important;
+  margin: 0 0 15px 0 !important;
+}
+
+/* 3. Ô bao bọc nội dung giới thiệu (Nền mờ + Thanh trượt) */
+.char-description-box {
+  background: rgba(18, 24, 36, 0.5) !important; /* Nền tối trong suốt 50% */
+  backdrop-filter: blur(
+    4px
+  ) !important; /* Làm mờ hình ảnh nhân vật chạy qua phía sau */
+  -webkit-backdrop-filter: blur(0%) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.18) !important; /* Viền mảnh nhẹ */
+  border-radius: 6px !important;
+  padding: 16px 20px !important;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.9) !important;
+
+  /* Thiết lập giới hạn chiều cao & bật thanh trượt tự động */
+  max-height: 140px !important; /* Chiều cao tối đa của khung */
+  overflow-y: auto !important; /* Tự hiện thanh trượt nếu bài dài */
+  box-sizing: border-box !important;
+}
+
+/* 4. Đoạn văn bản giới thiệu chữ trắng nét rõ */
+.char-description-box p {
+  color: #ffffff !important;
+  font-size: 15px !important;
+  line-height: 1.65 !important;
+  margin: 0 !important;
+  font-weight: 400 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.8) !important;
+  position: relative;
+  padding-left: 20px; /* Chừa chỗ cho icon hình thoi ❖ */
+}
+
+/* Tạo biểu tượng hình thoi ❖ ở đầu đoạn văn giống game */
+.char-description-box p::before {
+  content: "❖";
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: #e3c99a; /* Màu vàng kim */
+  font-size: 12px;
+}
+
+/* 5. ĐỘ DIỆN THANH TRƯỢT (CUSTOM SCROLLBAR) TINH TẾ */
+.char-description-box::-webkit-scrollbar {
+  width: 4px !important; /* Độ rộng thanh trượt mỏng nhẹ */
+}
+
+.char-description-box::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.5) !important; /* Rãnh trượt mờ */
+  border-radius: 4px !important;
+}
+
+.char-description-box::-webkit-scrollbar-thumb {
+  background: #e3c99a !important; /* Cục trượt màu vàng kim chuẩn Genshin */
+  border-radius: 4px !important;
+}
+
+.char-description-box::-webkit-scrollbar-thumb:hover {
+  background: #ffffff !important;
+}
+/* Hiệu ứng chuyển đổi nhân vật mượt mà */
+#characters-page img,
+.character-main-img {
+  transition:
+    opacity 0.2s ease-in-out,
+    transform 0.2s ease-in-out !important;
+}
+
+/* Lớp mờ tạm thời khi click chuyển đổi */
+.fade-out {
+  opacity: 0 !important;
+  transform: scale(0.96);
+}
+/* ==========================================================
+   LÀM RÕ NÉT VÀ NỔI BẬT MENU DANH SÁCH QUỐC GIA BÊN TRÁI
+   ========================================================== */
+
+/* 1. Đảm bảo khung danh sách quốc gia nằm nổi lên trên */
+.nations-sidebar,
+.nations-list {
+  position: relative !important;
+  z-index: 10 !important;
+}
+
+/* 2. Các tên quốc gia CHƯA CHỌN (Tăng độ sáng + Đổ bóng gắt chống chìm) */
+.nation-item,
+.nation-nav-item {
+  color: rgba(255, 255, 255, 0.88) !important; /* Tăng độ sáng chữ trắng */
+  font-size: 16px !important;
+  font-weight: 600 !important;
+  opacity: 1 !important; /* Bỏ độ mờ mờ mờ cũ */
+
+  /* Đổ bóng đen dày giúp chữ nét căng trên mọi loại ảnh nền */
+  text-shadow:
+    0 2px 6px rgba(0, 0, 0, 0.95),
+    0 0 10px rgba(0, 0, 0, 0.85) !important;
+  transition: all 0.25s ease !important;
+}
+
+/* 3. Hiệu ứng khi RÊ CHUỘT (Hover) vào tên quốc gia */
+.nation-item:hover,
+.nation-nav-item:hover {
+  color: #ffffff !important;
+  text-shadow:
+    0 0 12px rgba(255, 255, 255, 0.9),
+    0 2px 8px rgba(0, 0, 0, 0.9) !important;
+  transform: translateX(4px) !important; /* Nhích nhẹ sang phải cho đẹp mắt */
+}
+
+/* 4. Tên quốc gia ĐANG CHỌN (ACTIVE) sáng rực rõ ràng */
+.nation-item.active,
+.nation-nav-item.active {
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  text-shadow:
+    0 0 15px rgba(227, 201, 154, 0.9),
+    0 2px 8px rgba(0, 0, 0, 0.95) !important;
+}
+/* ==========================================================
+   XỬ LÝ VIDEO BACKGROUND ĐỘNG CỐ ĐỊNH FULL MÀN HÌNH
+   ========================================================== */
+/* 1. Đảm bảo khung chứa không bị đè nền đen */
+#video-page {
+  position: relative !important;
+  background: transparent !important;
+  min-height: 100vh !important;
+}
+
+/* 2. Video nền ghim cố định tràn màn hình */
+.video-bg {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  object-fit: cover !important;
+  z-index: 0 !important; /* Nổi lên trên lớp nền đen của body */
+  pointer-events: none !important;
+}
+
+/* 3. Lớp phủ tối mỏng nhẹ */
+.video-bg-overlay {
+  display: none !important;
+}
+
+/* 4. Nội dung danh sách video nổi lên trên cùng */
+.video-page-container,
+#video-page .section-title,
+#video-page .video-grid {
+  position: relative !important;
+  z-index: 10 !important;
+}
+/* Đẩy Footer nổi lên trên lớp nền Video */
+footer,
+.site-footer {
+  position: relative !important;
+  z-index: 20 !important; /* Cao hơn z-index của video nền */
+  background: #0b0e14 !important; /* Nền đen tối riêng biệt cho Footer */
+}

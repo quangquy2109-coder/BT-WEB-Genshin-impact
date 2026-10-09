@@ -1,0 +1,1491 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="Genshin.img/Logo GI.jpg"
+      type="image/x-icon"
+    />
+    <title>Genshin Impact - Nơi lưu giữ hồi ức</title>
+
+    <!-- Link FontAwesome để dùng các Icon (Nhạc, Video, Play, Pause...) -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <!-- Link file CSS (Sẽ chèn vào ở bước sau) -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- ==========================================
+         1. THANH NAVIGATION (THANH ĐIỀU HƯỚNG)
+    =========================================== -->
+    <header class="navbar-header">
+      <div class="nav-container">
+        <!-- Logo Trang Web -->
+        <a href="./index.html" class="logo">
+          <!-- 📌 [GHI CHÚ SINH VIÊN]: Thay link ảnh logo nếu muốn -->
+          <img src="./Genshin.img/no-bg.png" alt="Genshin Impact Logo" />
+        </a>
+
+        <!-- Menu Chính phần này sẽ thêm các link sau này làm tiếp-->
+        <nav class="nav-menu">
+          <ul>
+            <!-- SỬA DÒNG 37 & 38 TRONG INDEX.HTML -->
+            <li><a href="#" id="navHome" class="active">Trang Chủ</a></li>
+            <li><a href="#" id="navNews">Tin Tức</a></li>
+            <li class="nav-item dropdown">
+            <a href="#" class="nav-link" id="navExplore">
+        Khám Phá <i class="fa-solid fa-chevron-down nav-arrow"></i>
+            </a>
+                <div class="dropdown-menu">
+                <a href="#" class="dropdown-item" id="btnIntroGame">Giới Thiệu Game</a>
+                <a href="#characters" class="dropdown-item" id="btnCharacters">Nhân Vật</a>
+                </div>
+            </li>
+            <li><a href="https://www.hoyolab.com/circles/2/27/official?page_type=27&page_sort=events&utm_source=officialweb&utm_medium=toptoolbar&utm_id=2" target="_blank">HoYolAB</a></li>
+            <li><a href="#video-page" id="navVideo" class="nav-item">VIDEO</a></li>
+            <li><a href="https://sdk.hoyoverse.com/payment/genshin/vi/index.html" target="_blank">Trung Tâm Nạp</a></li>
+            <li><a href="#gift-page" id="navGift" class="nav-item">Mã Quà</a></li>
+          </ul>
+        </nav>
+       <!-- Lối tắt Media ( Music Menu) -->
+    <div class="header-media-actions">
+
+    <div class="music-dropdown-wrapper">
+        <button class="btn-media btn-music" id="musicMenuBtn">
+            <i class="fa-solid fa-music"></i> Music <i class="fa-solid fa-chevron-down arrow-icon"></i>
+        </button>
+
+        <!-- Bảng danh sách bài hát xổ xuống -->
+        <div class="music-playlist-dropdown" id="musicDropdown">
+            <div class="playlist-header">
+                <i class="fa-solid fa-list-ul"></i> DANH SÁCH BÀI HÁT
+            </div>
+            <ul class="playlist-items">
+                <!-- 📌 [GHI CHÚ SINH VIÊN]: Điền đường dẫn file mp3, tên bài và nghệ sĩ vào các data-* -->
+                
+                <li class="playlist-item active" 
+                    data-src="Genshin.audio/A Distant Farewell.mp3" 
+                    data-title="A Distant Farewell - Genshin Impact" 
+                    data-artist="HOYO-MiX">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <div class="song-info">
+                        <span class="song-title">A Distant Farewell</span>
+                        <span class="song-artist">HOYO-MiX</span>
+                    </div>
+                </li>
+
+                <li class="playlist-item" 
+                    data-src="Genshin.audio/Say My Name.mp3" 
+                    data-title="Say My Name - Genshin impact" 
+                    data-artist="HOYO-MiX">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <div class="song-info">
+                        <span class="song-title">Say My Name</span>
+                        <span class="song-artist">HOYO-MiX</span>
+                    </div>
+                </li>
+
+                <li class="playlist-item" 
+                    data-src="Genshin.audio/O Strings, My Strings.mp3" 
+                    data-title="O Strings, My Strings - Genshin impact" 
+                    data-artist="HOYO-MiX">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <div class="song-info">
+                        <span class="song-title">O Strings, My Strings</span>
+                        <span class="song-artist">HOYO-MiX</span>
+                    </div>
+                </li>
+
+                <li class="playlist-item" 
+                    data-src="Genshin.audio/Immaculate-Yearning_009_128k.mp3" 
+                    data-title="Immaculate Yearning - Genshin impact" 
+                    data-artist="HOYO-MiX">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <div class="song-info">
+                        <span class="song-title">Immaculate Yearning</span>
+                        <span class="song-artist">HOYO-MiX</span>
+                    </div>
+                </li>
+                <li class="playlist-item" 
+                    data-src="Genshin.audio/Many-Fallen-Dreams_009_128k.mp3" 
+                    data-title="Many Fallen Dreams - Genshin impact" 
+                    data-artist="HOYO-MiX">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <div class="song-info">
+                        <span class="song-title">Many Fallen Dreams</span>
+                        <span class="song-artist">HOYO-MiX</span>
+                    </div>
+                </li>
+                <li class="playlist-item" 
+                    data-src="Genshin.audio/Sorush-s-Purity_009_128k.mp3" 
+                    data-title="Sorush's Purity - Genshin impact" 
+                    data-artist="HOYO-MiX">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <div class="song-info">
+                        <span class="song-title">Sorush's Purity</span>
+                        <span class="song-artist">HOYO-MiX</span>
+                    </div>
+                </li>
+                <li class="playlist-item" 
+                    data-src="Genshin.audio/Newborn-Life_009_128k.mp3" 
+                    data-title="Dirge of Newborn Life - Genshin impact" 
+                    data-artist="HOYO-MiX">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <div class="song-info">
+                        <span class="song-title">Dirge of Newborn Life</span>
+                        <span class="song-artist">HOYO-MiX</span>
+                    </div>
+                </li>
+                <li class="playlist-item" 
+                    data-src="Genshin.audio/Maidens-of-Sanctity_009_128k.mp3" 
+                    data-title="Maidens of Sanctity - Genshin impact" 
+                    data-artist="HOYO-MiX">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <div class="song-info">
+                        <span class="song-title">Maidens of Sanctity</span>
+                        <span class="song-artist">HOYO-MiX</span>
+                    </div>
+                </li>
+
+                <li class="playlist-item" 
+                    data-src="Genshin.audio/Nhac_nen_auto.mp3" 
+                    data-title="Eternal Anamnesis - Genshin impact" 
+                    data-artist="HOYO-MiX">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <div class="song-info">
+                        <span class="song-title"> Eternal Anamnesis </span>
+                        <span class="song-artist">HOYO-MiX</span>
+                    </div>
+                </li>
+                
+                <li class="playlist-item" 
+                    data-src="Genshin.audio/Dzwony Na Nieszpory.mp3" 
+                    data-title="Dzwony Na Nieszpory - Genshin impact" 
+                    data-artist="HOYO-MiX">
+                    <i class="fa-solid fa-compact-disc"></i>
+                    <div class="song-info">
+                        <span class="song-title"> Dzwony Na Nieszpory </span>
+                        <span class="song-artist">HOYO-MiX</span>
+                    </div>
+                </li>  
+
+            </ul>
+         
+    <div class="playlist-footer">
+        <button id="toggleAutoNextBtn" class="btn-auto-next active">
+            <i class="fa-solid fa-repeat"></i> Tự động chuyển bài: Bật</button>
+    </div>
+        </div>
+    </div>
+</div>
+<button type="button" class="btn-download-header" id="openDownloadModalBtn">
+          Tải Game
+        </button>
+</div>
+    </header>
+
+    </header> <!-- Dòng 167 trong code của bạn -->
+
+    <!-- ========================================================= -->
+    <!-- THÊM MỚI: POPUP MODAL TẢI GAME (SẼ HIỂN THỊ KHI BẤM NÚT)  -->
+    <!-- ========================================================= -->
+    <div class="download-modal-overlay" id="downloadModal" aria-hidden="true">
+      <div class="download-modal-card">
+        
+        <!-- Nút đóng 'X' -->
+        <button type="button" class="modal-close-btn" id="closeDownloadModalBtn" aria-label="Đóng Popup">
+          &times;
+        </button>
+
+        <!-- Tiêu đề Popup -->
+        <h2 class="modal-title">
+          <span class="sparkle">✦</span> Tải Game <span class="sparkle">✦</span>
+        </h2>
+
+        <!-- Nội dung chính trong Popup -->
+        <div class="modal-body">
+          
+          <!-- Cột trái: Mã QR -->
+          <div class="qr-container">
+            <img src="./Tai_game.img/QR_Genshin.png" alt="Mã QR Tải Game Genshin Impact" class="qr-image" />
+          </div>
+
+          <!-- Cột phải: Lưới các nút Tải Game -->
+          <div class="download-platforms-grid">
+            
+            <!-- PS5 -->
+            <a href="https://www.playstation.com/en-vn/games/genshin-impact/" target="_blank" class="platform-btn ps5">
+              <img src="./Tai_game.img/PSS.png" alt="PS5" class="platform-icon" />
+            </a>
+
+            <!-- PC HoYoPlay -->
+            <a href="#" class="platform-btn pc-hoyoplay">
+              <img src="./Tai_game.img/PC.png" alt="PC" class="platform-icon" />
+              <div class="btn-text">
+                <span class="text-sub">Tải Xuống PC</span>
+                <span class="text-main">(HoYoPlay)</span>
+              </div>
+            </a>
+
+            <!-- XBOX -->
+            <a href="https://www.xbox.com/vi-VN/games/store/genshin-impact/9N7TFFRRZCC9" target="_blank" class="platform-btn xbox">
+              <img src="./Tai_game.img/XBOX.png" alt="XBOX" class="platform-icon" />
+              <div class="btn-text">
+                <span class="text-main">XBOX</span>
+                <span class="text-sub">SERIES X|S</span>
+              </div>
+            </a>
+
+            <!-- Google Play Games PC -->
+            <a href="https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact" target="_blank" class="platform-btn gplay-pc">
+              <img src="./Tai_game.img/Google_play.png" alt="Google Play" class="platform-icon" />
+              <div class="btn-text">
+                <span class="text-sub">PLAY ON PC</span>
+                <span class="text-main">Google Play Games</span>
+              </div>
+            </a>
+
+            <!-- App Store -->
+            <a href="https://apps.apple.com/vn/app/genshin-impact-funtap/id6451477469" target="_blank" class="platform-btn appstore">
+              <img src="./Tai_game.img/App_store.png" alt="App Store" class="platform-icon" />
+              <div class="btn-text">
+                <span class="text-sub">Tải về trên</span>
+                <span class="text-main">App Store</span>
+              </div>
+            </a>
+
+            <!-- Google Play Mobile -->
+            <a href="https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact.vn" target="_blank" class="platform-btn gplay-mobile">
+              <img src="./Tai_game.img/Google.png" alt="Google Play" class="platform-icon" />
+              <div class="btn-text">
+                <span class="text-sub">TẢI TRÊN</span>
+                <span class="text-main">Google Play</span>
+              </div>
+            </a>
+
+            <!-- Epic Store -->
+            <a href="https://store.epicgames.com/p/genshin-impact" target="_blank" class="platform-btn epic">
+              <img src="./Tai_game.img/EPIC.png" alt="Epic Store" class="platform-icon" />
+              <div class="btn-text">
+                <span class="text-main">EPIC STORE</span>
+              </div>
+            </a>
+
+          </div> <!-- End .download-platforms-grid -->
+
+        </div> <!-- End .modal-body -->
+
+      </div> <!-- End .download-modal-card -->
+    </div> <!-- End .download-modal-overlay -->
+
+    <!-- I. PHẦN NỘI DUNG TRANG CHỦ -->
+
+     <section id="home-page" class="page-section active">
+    <!-- ==========================================
+         1. BANNER CHÍNH (HERO SECTION)
+    =========================================== -->
+    <!-- TRANG ĐẦU (HERO SECTION) - NỀN ĐỘNG + BẢNG TẢI GAME HOYOVERSE -->
+<section class="hero-section">
+    
+   <video autoplay loop muted playsinline poster="./Genshin.img/poster.jpg" class="hero-bg-video">
+        <source src="./Genshin.mp4/Background 6.mp4" type="video/mp4"></video>
+
+    <!-- 2. CÂU TIÊU ĐỀ NẰM NỔI Ở GIỮA -->
+<div class="hero-content">
+    <h1 class="hero-title">PHIÊU LƯU VÀO THẾ GIỚI THẦN KỲ</h1>
+    <p class="hero-subtitle">Nơi lưu giữ những hồi ức</p>
+
+    <!-- 🔑 NÚT PLAY VIDEO PHONG CÁCH GENSHIN (Thay đường dẫn YouTube của bạn vào href) -->
+    <a href="https://www.youtube.com/watch?v=TAlKhARUcoY" target="_blank" class="play-video-btn" title="Xem Trailer">
+        <span class="play-icon"></span>
+    </a>
+</div>
+
+    <!-- 3. KHU VỰC TẢI GAME -->
+    <div class="hero-download-bar">
+        <!-- Mã QR -->
+        <div class="qr-code-box">
+            <img src="./Tai_game.img/QR_Genshin.png" alt="QR Code Genshin Impact">
+        </div>
+
+        <!-- Lưới các nút tải game -->
+    <div class="download-grid">
+        <a href="https://www.playstation.com/en-vn/games/genshin-impact/" target="_blank"class="dl-btn"><img src="./Tai_game.img/PSS.png" alt="PS5"></a>
+        <a href="#" class="dl-btn"><img src="./Tai_game.img/PC.png" alt="PC"></a>
+        <a href="https://www.xbox.com/vi-VN/games/store/genshin-impact/9N7TFFRRZCC9" target="_blank"class="dl-btn"><img src="./Tai_game.img/XBOX.png" alt="Xbox"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact" target="_blank"class="dl-btn"><img src="./Tai_game.img/Google_play.png" alt="Google Play"></a>
+        <a href="https://play.google.com/store/apps/details?id=com.miHoYo.GenshinImpact" target="_blank"class="dl-btn"><img src="./Tai_game.img/Google.png" alt="Google Play"></a>
+        <a href="https://apps.apple.com/vn/app/genshin-impact-funtap/id6451477469" target="_blank"class="dl-btn"><img src="./Tai_game.img/App_store.png" alt="App Store"></a>
+        <a href="https://store.epicgames.com/p/genshin-impact" target="_blank"class="dl-btn"><img src="./Tai_game.img/EPIC.png" alt="Epic Games"></a>
+    </div>
+
+        <!-- Cảnh báo 18+ -->
+        <div class="warning-box">
+            <div class="age-badge">18+</div>
+            <p>Chơi game quá 180 phút một ngày sẽ ảnh hưởng xấu đến sức khỏe</p>
+        </div>
+    </div>
+
+</section>
+
+    <!-- KHU VỰC TIN TỨC (NEWS SECTION) CHUẨN 2 CỘT GENSHIN -->
+<section id="news" class="news-section">
+    <div class="section-title">
+        <h2>TIN TỨC MỚI NHẤT</h2>
+        <div class="title-line"></div>
+    </div>
+
+    <div class="news-container">
+        <!-- CỘT TRÁI: BANNER BÀI TIN NỔI BẬT -->
+        <div class="news-featured" id="news-featured-box">
+            <div class="featured-img-wrapper" id="newsBanner">
+                <!-- Danh sách các tấm ảnh tương ứng từng bài tin -->
+                <img class="banner-slide active" src="./Genshin.img/Thong_bao 4.jpg" alt="Tin 1">
+                <img class="banner-slide" src="./Genshin.img/Thong_bao 2.jpg" alt="Tin 2">
+                <img class="banner-slide" src="./Genshin.img/Thong_bao 3.jpg" alt="Tin 3">
+                <img class="banner-slide" src="./Genshin.img/New_bg2.jpg" alt="Tin 4">
+                <img class="banner-slide" src="./Genshin.img/Thong_bao 5.jpg" alt="Tin 5">
+                <img class="banner-slide" src="./Genshin.img/Thong_bao 6.jpg" alt="Tin 6">
+                <img class="banner-slide" src="./Genshin.img/Nhan_Vat 3.jpg" alt="Tin 7">
+                <img class="banner-slide" src="./Genshin.img/Nhan_vat 4.jpg" alt="Tin 8">
+                <img class="banner-slide" src="./Genshin.img/Su_kien 2.jpg" alt="Tin 9">
+
+                <!-- Nhãn loại tin -->
+                <span class="news-tag" id="featured-tag">Sự Kiện</span>
+
+                <!-- Chấm tròn chuyển slide -->
+                <div class="banner-dots">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+
+            <!-- Khối nội dung bài tin bên dưới ảnh -->
+            <div class="featured-info">
+                <span class="news-date" id="featured-date">02/10/2026</span>
+                <h3 id="featured-title">Video Cốt Truyện Genshin Impact - Cánh Én Trở Về</h3>
+                <p id="featured-desc">Biết đi về phương nao, cánh én nào lẻ bóng. Biết nơi đâu gặp lại, đèn bạc mãi sáng soi. Tỉnh mộng. Trâm ngọc chia đôi, huyền điểu khuất mây xa rồi....</p>
+            </div>
+        </div>
+
+        <!-- CỘT PHẢI: DANH SÁCH TIN TỨC (BẤM VÀO SẼ ĐỔI BANNER BÊN TRÁI) -->
+        <div class="news-list">
+            <div class="news-item active" 
+                 data-index="0"
+                 data-tag="Thông báo" 
+                 data-date="02/10/2026" 
+                 data-title="Video Cốt Truyện Genshin Impact - Cánh Én Trở Về" 
+                 data-desc="Biết đi về phương nao, cánh én nào lẻ bóng. Biết nơi đâu gặp lại, đèn bạc mãi sáng soi. Tỉnh mộng. Trâm ngọc chia đôi, huyền điểu khuất mây xa rồi..."
+                 data-img="Genshin.img/Thong_bao 4.jpg"
+                data-youtube-id="9wwm86um-UU">
+                <span class="news-item-tag">[Thông báo]</span>
+                <span class="news-item-title">Video Cốt Truyện Genshin Impact - Cánh Én Trở Về</span>
+                <span class="news-item-date">02/10/2026</span>
+            </div>
+
+            <div class="news-item" 
+                 data-index="1"
+                 data-tag="Thông tin" 
+                 data-date="28/09/2026" 
+                 data-title="[Genshin Impact] Video Kỷ Niệm Mạo Hiểm Teyvat: Thư Kỷ Niệm Sáu Năm Hành Trình" 
+                 data-desc="hành trình của chúng ta đã trải qua sáu năm...."
+                 data-img="Genshin.img/Thong_bao 2.jpg"
+                data-youtube-id="HG26dhG3zxQ">
+                <span class="news-item-tag">[Thông tin]</span>
+                <span class="news-item-title">[Genshin Impact] Video Kỷ Niệm Mạo Hiểm Teyvat: Thư Kỷ Niệm Sáu Năm Hành Trình</span>
+                <span class="news-item-date">28/09/2026</span>
+            </div>
+
+            <div class="news-item" 
+                 data-index="2"
+                 data-tag="Thông tin" 
+                 data-date="28/09/2026" 
+                 data-title="[Genshin Impact] Ca Khúc Chủ Đề Kỷ Niệm 6 Năm - A Letter from the Wind" 
+                 data-desc="Hành trình có bạn, đong đầy ý nghĩa."
+                 data-img="Genshin.img/Thong_bao 3.jpg"
+                data-youtube-id="ntcyVm9ebYI">
+                <span class="news-item-tag">[Thông tin]</span>
+                <span class="news-item-title">Hành trình có bạn, đong đầy ý nghĩa.</span>
+                <span class="news-item-date">02/10/2026</span>
+            </div>
+            
+            <div class="news-item" 
+                 data-index="3"
+                 data-tag="Bản tin" 
+                 data-date="23/09/2026" 
+                 data-title="Giới Thiệu Cập Nhật Phiên Bản 7.1 - Khúc An Hồn Cõi Âm" 
+                 data-desc="Nhà Lữ Hành thân mến: Dưới đây là nội dung cập nhật và đền bù của phiên bản 7.1 - Khúc An Hồn Cõi Âm"
+                 data-img="Genshin.img/New_bg2.jpg"
+                data-youtube-id="EwWbahV3qmU">
+                <span class="news-item-tag">[Bản tin]</span>
+                <span class="news-item-title">Giới Thiệu Cập Nhật Phiên Bản 7.1 - Khúc An Hồn Cõi Âm</span>
+                <span class="news-item-date">23/09/2026</span>
+            </div>
+
+            <div class="news-item" 
+                 data-index="4"
+                 data-tag="Thông tin" 
+                 data-date="22/09/2026" 
+                 data-title="[Genshin Impact] Giới Thiệu Nhân Vật - Vodyanitsa: Hòa Ca Trong Đêm" 
+                 data-desc="Cầu nguyện với trời cao, rồi gửi nỗi buồn về phía biển xa..."
+                 data-img="Genshin.img/Thong_bao 5.jpg"
+                data-youtube-id="8Ty-Btue6OI">
+                <span class="news-item-tag">[Thông tin]</span>
+                <span class="news-item-title">Cầu nguyện với trời cao, rồi gửi nỗi buồn về phía biển xa...</span>
+                <span class="news-item-date">22/09/2026</span>
+            </div>
+
+            <div class="news-item" 
+                 data-index="5"
+                 data-tag="Thông tin" 
+                 data-date="21/09/2026" 
+                 data-title="[Genshin Impact] Giới Thiệu Nhân Vật - Vesna: Vũ Điệu Sáng Mùa Xuân" 
+                 data-desc="Không cần bận tâm đến vị trí tư lệnh, cũng không cần giữ sự kiêu hãnh của quý tộc. Tận hưởng vũ điệu của màn đêm, rồi bình minh sẽ đến."
+                 data-img="Genshin.img/Thong_bao 6.jpg"
+                data-youtube-id="DBgFuu5Lrww">
+                <span class="news-item-tag">[Thông tin]</span>
+                <span class="news-item-title">[Genshin Impact] Giới Thiệu Nhân Vật - Vesna: Vũ Điệu Sáng Mùa Xuân</span>
+                <span class="news-item-date">21/09/2026</span>
+            </div>
+
+            <div class="news-item" 
+                 data-index="6"
+                 data-tag="Thông tin" 
+                 data-date="23/08/2026" 
+                 data-title="[Genshin Impact] Hoạt Cảnh - Chiến Thắng Trở Về" 
+                 data-desc="Ngai vàng trên vùng đất băng giá như trường tồn vĩnh cửu."
+                 data-img="Genshin.img/Nhan_Vat 3.jpg"
+                data-youtube-id="YridTO5hKfM">
+                <span class="news-item-tag">[Thông tin]</span>
+                <span class="news-item-title">Ngai vàng trên vùng đất băng giá như trường tồn vĩnh cửu.</span>
+                <span class="news-item-date">23/08/2026</span>
+            </div>
+
+            <div class="news-item" 
+                 data-index="7"
+                 data-tag="Thông tin" 
+                 data-date="22/08/2026" 
+                 data-title="[Genshin Impact] Hoạt Cảnh - Hồi Sinh Sắp Đến" 
+                 data-desc="Cô coi cái chết như công cụ, nên sẽ mãi không thể hiểu được chấp niệm của con người đối với cuộc sống và tình yêu."
+                 data-img="Genshin.img/Nhan_vat 4.jpg"
+                data-youtube-id="s5u5aSDvk0A">
+                <span class="news-item-tag">[Thông tin]</span>
+                <span class="news-item-title">[Genshin Impact] Hoạt Cảnh - Hồi Sinh Sắp Đến</span>
+                <span class="news-item-date">22/08/2026</span>
+            </div>
+
+            <div class="news-item" 
+                 data-index="8"
+                 data-tag="Thông tin" 
+                 data-date="12/08/2026" 
+                 data-title="Giới Thiệu Cập Nhật Phiên Bản 7.0 - Đất Nước Của Tuyết Không Được Thần Thương Yêu" 
+                 data-desc="Dưới đây là nội dung cập nhật và đền bù của phiên bản 7.0 - Đất Nước Của Tuyết Không Được Thần Thương Yêu"
+                  data-img="Genshin.img/Su_kien 2.jpg"
+                data-youtube-id="QgLZe9BtRJE">
+                <span class="news-item-tag">[Thông tin]</span>
+                <span class="news-item-title">Giới Thiệu Cập Nhật Phiên Bản 7.0 "Đất Nước Của Tuyết Không Được Thần Thương Yêu"</span>
+                <span class="news-item-date">12/08/2026</span>
+            </div>
+<!-- Nút Tải Thêm chuyển sang trang Tin Tức -->
+        <button id="homeMoreNewsBtn" class="home-more-news-btn">
+            Tải Thêm <i class="fa-solid fa-chevron-right"></i>
+        </button>
+        </div>
+    </div>
+</section>
+
+    <!-- ==========================================
+         4. KHU VỰC QUỐC GIA (NATIONS GRID - SÁNG TẠO)
+    =========================================== -->
+    <section id="nations" class="nations-section">
+      <div class="section-title">
+        <h2>CÁC QUỐC GIA TEYVAT</h2>
+        <p class="section-subtext"> (Nhấp vào quốc gia để khám phá bối cảnh và nhân vật đại diện)</p>
+        <div class="title-line"></div>
+      </div>
+      <div class="nations-wrapper">
+
+      <!-- Hiển thị kiểu Thẻ Lưới Grid thay vì Banner Dọc kéo dài -->
+      <div class="nations-grid">
+         <!-- Mondstadt  -->
+<div class="nation-card" data-element="anemo">
+    <!-- 1. Ảnh nền quốc gia (Có thêm class nation-bg) -->
+    <img src="./Genshin.img/mondstadt.jpg" alt="Mondstadt" class="nation-bg" />
+    
+    <!-- 🟢 2. Ảnh Venti nằm trực tiếp BÊN TRONG thẻ Mondstadt -->
+    <img src="./Genshin.img/Venti_Monstard.png" alt="Venti" class="nation-char" />
+
+    <!-- 3. Thông tin quốc gia -->
+    <div class="nation-info">
+        <span class="element-icon">
+            <img src="./Genshin 2.img/Phong_Monstard.png" alt="Phong" class="element-img" /> 
+            Phong
+        </span>
+        <h3>Mondstadt</h3>
+        <p>Thành Phố Của Tự Do</p>
+        
+        <button class="open-journey-btn" data-nation="mondstadt">❖ Xem Chi Tiết</button>
+        
+    </div>
+</div>
+
+        <!-- 2. LIYUE -->
+    <div class="nation-card" data-element="geo">
+        <img src="./Genshin.img/Liyue_Backgrond.png" alt="Liyue" class="nation-bg" />
+        <!-- Ảnh nhân vật (Thay đường dẫn bên dưới khi có ảnh) -->
+        <img src="./Genshin.img/Zhongli_Liyue.png" alt="Liyue Char" class="nation-char" />
+        <div class="nation-info">
+            <span class="element-icon">
+                <img src="./Genshin 2.img/Nham_Liyue.png" alt="Nham" class="element-img" /> Nham
+            </span>
+            <h3>Liyue</h3>
+            <p>Bến Cảng Của Khế Ước</p>
+            <button class="open-journey-btn" data-nation="liyue">❖ Xem Chi Tiết</button>
+            </div>
+    </div>
+
+        <!-- 3. INAZUMA -->
+    <div class="nation-card" data-element="electro">
+        <img src="./Genshin.img/Inazuma_background.jpg" alt="Inazuma" class="nation-bg" />
+        <!-- Ảnh nhân vật -->
+        <img src="./Genshin.img/Raiden Shogun_Inazuma.png" alt="Inazuma Char" class="nation-char" />
+        <div class="nation-info">
+            <span class="element-icon">
+                <img src="./Genshin 2.img/Loi_Inazuma.png" alt="Lôi" class="element-img" /> Lôi
+            </span>
+            <h3>Inazuma</h3>
+            <p>Quần Đảo Của Vĩnh Hằng</p>
+            <button class="open-journey-btn" data-nation="inazuma">❖ Xem Chi Tiết</button>
+    </div>
+        </div>
+    
+
+        <!-- 4. SUMERU -->
+    <div class="nation-card" data-element="dendro">
+        <img src="./Genshin.img/Sumeru_Background.png" alt="Sumeru" class="nation-bg" />
+        <!-- Ảnh nhân vật -->
+        <img src="./Genshin.img/nahida_Sumeru.png" alt="Sumeru Char" class="nation-char" />
+        <div class="nation-info">
+            <span class="element-icon">
+                <img src="./Genshin 2.img/Thao_Sumeru.png" alt="Thảo" class="element-img" /> Thảo
+            </span>
+            <h3>Sumeru</h3>
+            <p>Giáo Viện Của Trí Thức</p>
+             <button class="open-journey-btn" data-nation="sumeru">❖ Xem Chi Tiết</button>
+        </div>
+    </div>
+
+        <!-- 5. FONTAINE -->
+    <div class="nation-card" data-element="hydro">
+        <img src="./Genshin.img/Fontaine_Background.jpg" alt="Fontaine" class="nation-bg" />
+        <!-- Ảnh nhân vật -->
+        <img src="./Genshin.img/Furina_Fontaine.png" alt="Fontaine Char" class="nation-char" />
+        <div class="nation-info">
+            <span class="element-icon">
+                <img src="./Genshin 2.img/Thuy_Fontaine.png" alt="Thủy" class="element-img" /> Thủy
+            </span>
+            <h3>Fontaine</h3>
+            <p>Đất Nước Của Công Lý</p>
+             <button class="open-journey-btn" data-nation="fontaine">❖ Xem Chi Tiết</button>
+        </div>
+    </div>
+
+       <!-- 6. NATLAN -->
+    <div class="nation-card" data-element="pyro">
+        <img src="./Genshin.img/Natlan_Background.jpg" alt="Natlan" class="nation-bg" />
+        <!-- Ảnh nhân vật -->
+        <img src="./Genshin.img/Mavuika_Natlan.png" alt="Natlan Char" class="nation-char" />
+        <div class="nation-info">
+            <span class="element-icon">
+                <img src="./Genshin 2.img/hoa_Natlan.png" alt="Hỏa" class="element-img" /> Hỏa
+            </span>
+            <h3>Natlan</h3>
+            <p>Thánh Địa Của Chiến Tranh</p>
+             <button class="open-journey-btn" data-nation="natlan">❖ Xem Chi Tiết</button>
+        </div>
+    </div>
+
+          <!-- 7. NOD KRAI -->
+    <div class="nation-card" data-element="moon">
+        <img src="./Genshin.img/Nod Krai_Background.png" alt="Nod Krai" class="nation-bg" />
+        <!-- Ảnh nhân vật -->
+        <img src="./Genshin.img/Columbina_Nod Krai.png" alt="Nod Krai Char" class="nation-char" />
+        <div class="nation-info">
+            <span class="element-icon">
+                <img src="./Genshin 2.img/Moon_Nod Krai.png" alt="Nguyệt" class="element-img" /> Nguyệt
+            </span>
+            <h3>Nod Krai</h3>
+            <p>Vùng Đất Sương Nguyệt</p>
+             <button class="open-journey-btn" data-nation="snezhnaya">❖ Xem Chi Tiết</button>
+        </div>
+    </div>
+
+     <!-- 8 Snezhnaya -->
+        <div class="nation-card" data-element="cryo">
+        <img src="./Genshin.img/Snezhnaya_Backgrond.jpg" alt="Snezhnaya" class="nation-bg" />
+        <!-- Ảnh nhân vật -->
+        <img src="./Genshin.img/Tesarisa_Snezhnaya.png" alt="Snezhnaya Char" class="nation-char" />
+        <div class="nation-info">
+            <span class="element-icon">
+                <img src="./Genshin 2.img/Bang_Snezhnaya.png" alt="Băng" class="element-img" /> Băng
+            </span>
+            <h3>Snezhnaya</h3>
+            <p>Đất Nước Không Được Thần Thương Yêu</p>
+             <button class="open-journey-btn" data-nation="snezhnaya">❖ Xem Chi Tiết</button>
+        </div>
+    </div>
+
+    <!-- ==========================================================
+     KHUNG POPUP GIỚI THIỆU CHI TIẾT QUỐC GIA (MODAL GENSHIN)
+     ========================================================== -->
+<div class="nation-info-modal" id="nationInfoModal">
+    <div class="nation-info-content">
+        <!-- Nút đóng 'X' góc trên bên phải -->
+        <button class="modal-close-x" id="closeNationInfoBtn">&times;</button>
+        
+        <!-- Dòng tên quốc gia phía trên -->
+        <div class="modal-nation-header">
+            <span id="modalNationName">Mondstadt</span>
+        </div>
+
+        <!-- Nội dung giới thiệu địa danh -->
+        <div class="modal-nation-body">
+            <h2 id="modalSpotTitle">Hồ Rượu Trái Cây</h2>
+            <div class="spot-title-line"></div>
+            
+            <p id="modalSpotDesc">
+                Là hồ nước ngọt tự nhiên bao quanh Thành Mondstadt...
+            </p>
+
+            <!-- Khung chứa ảnh giới thiệu -->
+            <div class="modal-spot-img-box">
+                <img id="modalSpotImg" src="./Genshin.img/mondstadt.jpg" alt="Địa danh">
+            </div>
+        </div>
+    </div>
+</div>
+       
+    </section>
+
+</section>
+<!-- ========================================================== -->
+<!-- TRANG TIN TỨC ĐỘC LẬP (ĐÃ THÊM DATA-CATEGORY ĐỂ LỌC)       -->
+<!-- ========================================================== -->
+<section id="news-page" class="page-section">
+    <div class="news-page-container">
+        <h2 class="news-page-title">TRUNG TÂM TIN TỨC</h2>
+
+        <!-- 1. Thanh nút bộ lọc (Thêm data-category cho từng nút) -->
+        <div class="news-filter-bar">
+            <button class="filter-btn active" data-category="all">Tất Cả</button>
+            <button class="filter-btn" data-category="thong-tin">Thông Tin</button>
+            <button class="filter-btn" data-category="su-kien">Sự Kiện</button>
+            <button class="filter-btn" data-category="ban-tin">Bản Tin</button>
+        </div>
+
+        <!-- 2. Lưới bài viết (Thêm data-category tương ứng cho mỗi thẻ) -->
+        <div class="news-page-grid">
+            
+            <!-- Thông tin 1 -->
+            <div class="news-page-card" data-category="thong-tin" data-youtube-id="rEoZ_t5oBmQ">
+                <div class="news-card-thumb">
+                    <img src="./Genshin_News.img/Thong_tin1.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">THÔNG TIN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>[Genshin Impact] Hoạt Cảnh - Dấu Ấn Sự Sống</h3>
+                    <p>Trong một số truyền thuyết, sinh vật một sừng tượng trưng cho sự cao ngạo và thuần khiết </p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 06/10/2026</span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thông tin 2 -->
+            <div class="news-page-card" data-category="thong-tin">
+                <div class="news-card-thumb">
+                    <img src="./Genshin_News.img/Thong_tin2.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">THÔNG TIN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>[Chia Sẻ Hình Nền] Sổ Lưu Giữ Kỷ Niệm - Cùng Bạn Đồng Hành Tốt Nhất Nhìn Lại Hành Trình Đã Qua!</h3>
+                    <p>Nhà Lữ Hành thân mến! Trên hành trình này, chúng ta đã ngắm nhìn biết bao cảnh sắc kỳ diệu, và cũng trải qua không ít thử thách cam go.</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 05/10/2026</span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thông tin 3 -->
+            <div class="news-page-card" data-category="thong-tin" data-youtube-id="9wwm86um-UU">
+                <div class="news-card-thumb">
+                    <img src="./Genshin.img/Thong_bao 4.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">THÔNG TIN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>Video Cốt Truyện Genshin Impact - Cánh Én Trở Về</h3>
+                    <p>Biết đi về phương nao, cánh én nào lẻ bóng. Biết nơi đâu gặp lại, đèn bạc mãi sáng soi. Tỉnh mộng. Trâm ngọc chia đôi, huyền điểu khuất mây xa rồi.</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 02/10/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sự kiện 2-->
+            <div class="news-page-card" data-category="su-kien">
+                <div class="news-card-thumb">
+                    <img src="./Genshin_News.img/Su_kien1.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">SỰ KIỆN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>Sự kiện web Thiên Tinh Kỳ Vực "Lễ Hội Sao Sáng" của Genshin Impact mở hạn giờ</h3>
+                    <p>Trong thời gian diễn ra sự kiện, Nhà Lữ Hành hoàn thành nhiệm vụ trên trang web sẽ nhận được phần thưởng Nguyên Thạch, Tinh Thể Tái Hiện, đạo cụ "Thiên Tinh Kỳ Vực" v.v. Chi tiết nhiệm vụ vui lòng xem tại trang sự kiện.</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 01/10/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Sự kiện 2-->
+            <div class="news-page-card" data-category="su-kien">
+                <div class="news-card-thumb">
+                    <img src="./Genshin_News.img/Su_kien2.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">SỰ KIỆN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>Hình Nền Lịch Genshin Impact Tháng 10</h3>
+                    <p>Nhà Lữ Hành thân mến, hôm nay xin được mang đến cho các bạn hình nền lịch tháng 10/2026 (phiên bản PC/điện thoại di động/Apple Watch). Nhà Lữ Hành hãy lưu lại để sử dụng nhé!</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 30/09/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sự kiện 3-->
+            <div class="news-page-card" data-category="su-kien">
+                <div class="news-card-thumb">
+                    <img src="./Genshin_News.img/Su_kien3.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">SỰ KIỆN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>Sự Kiện Đã Mở: Nhiệm Vụ Tuần Tra Của Vesna</h3>
+                    <p>Nhiệm Vụ Tuần Tra Của Vesna đã mở! Hãy phối hợp cùng Tư Lệnh Druzhna Vesna hoàn thành nhiệm vụ tuần tra để nhận 40 Nguyên Thạch và nhiều phần thưởng hấp dẫn khác nhé!</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 24/09/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+             <!-- bản tin 1 -->
+            <div class="news-page-card" data-category="ban-tin" data-youtube-id="EwWbahV3qmU">
+                <div class="news-card-thumb">
+                    <img src="./Genshin.img/New_bg2.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">BẢN TIN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>Giới Thiệu Cập Nhật Phiên Bản 7.1 "Khúc An Hồn Cõi Âm"</h3>
+                    <p>Nhà Lữ Hành thân mến: Dưới đây là nội dung cập nhật và đền bù của phiên bản 7.1 "Khúc An Hồn Cõi Âm".</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 23/09/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bài viết 8-->
+            <div class="news-page-card" data-category="ban-tin" data-youtube-id="QgLZe9BtRJE">
+                <div class="news-card-thumb">
+                    <img src="./Genshin.img/Su_kien 2.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">BẢN TIN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>Giới Thiệu Cập Nhật Phiên Bản 7.0 "Đất Nước Của Tuyết Không Được Thần Thương Yêu"</h3>
+                    <p>Nhà Lữ Hành thân mến: Dưới đây là nội dung cập nhật và đền bù của phiên bản 7.0 "Đất Nước Của Tuyết Không Được Thần Thương Yêu".</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 12/08/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bài viết 9-->
+            <div class="news-page-card" data-category="ban-tin" data-youtube-id="ou_LXniASyY">
+                <div class="news-card-thumb">
+                    <img src="./Genshin_News.img/Ban_tin3.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">BẢN TIN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>Giới Thiệu Cập Nhật Phiên Bản Luna VIII "Bài Ca Không Nguyệt - Vui Đùa: Nắng Hạ, Về Nhà? Fontinalia!"</h3>
+                    <p>Nhà Lữ Hành thân mến: Dưới đây là nội dung cập nhật và đền bù của phiên bản Luna VIII "Bài Ca Không Nguyệt - Vui Đùa: Nắng Hạ, Về Nhà? Fontinalia!".</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 01/07/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bản tin 4-->
+            <div class="news-page-card" data-category="ban-tin" data-youtube-id="Tq9rQtiHg5U">
+                <div class="news-card-thumb">
+                    <img src="./Genshin_News.img/Ban_tin4.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">BẢN TIN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>Giới Thiệu Cập Nhật Phiên Bản Luna VII "Bài Ca Không Nguyệt - Nhịp Nhàng: Purana Hư Không Và Tro Tàn"</h3>
+                    <p>Nhà Lữ Hành thân mến: Dưới đây là nội dung cập nhật và đền bù của phiên bản Luna VII "Bài Ca Không Nguyệt - Nhịp Nhàng: Purana Hư Không Và Tro Tàn".</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 20/05/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sự kiện 4-->
+            <div class="news-page-card" data-category="su-kien">
+                <div class="news-card-thumb">
+                    <img src="./Genshin_News.img/Su_kien4.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">SỰ KIỆN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>Hình Nền Lịch Genshin Impact Tháng 9</h3>
+                    <p>Sự Kiện Rút Thưởng Hình Nền Lịch Genshin Impact Tháng 9 đã kết thúc, cảm ơn các Nhà Lữ Hành đã nhiệt tình tham gia!</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 31/08/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sự kiện 5-->
+            <div class="news-page-card" data-category="su-kien">
+                <div class="news-card-thumb">
+                    <img src="./Genshin_News.img/Su_kien5.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">SỰ KIỆN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>Snezhnaya Career Test</h3>
+                    <p>Cảm ơn mọi người đã tham gia sự kiện "Kiểm Tra Nghề Nghiệp Snezhnaya". Chúng tôi đã chuẩn bị hình nền giới hạn sự kiện cho mọi người, hãy thoải mái lưu về dùng nhé.</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 13/08/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Sự kiện 6-->
+            <div class="news-page-card" data-category="su-kien">
+                <div class="news-card-thumb">
+                    <img src="./Genshin_News.img/Su_kien6.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">SỰ KIỆN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>Sự kiện web "Cẩm Nang Du Lịch Snezhnaya" mở hạn giờ</h3>
+                    <p>Trong thời gian diễn ra sự kiện, Nhà Lữ Hành hoàn thành nhiệm vụ "Dẫn Đường Vùng Tuyết", "Hành Trình Trở Về Vùng Tuyết" (dành riêng cho Nhà Lữ Hành trở về), Sổ Tay Đồng Hành có thể nhận được Nguyên Thạch và Chìa Khóa Băng, dùng Chìa Khóa Băn để tham gia rút thưởng nhận thêm nhiều phúc lợi</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 12/08/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thông tin 4-->
+            <div class="news-page-card" data-category="thong-tin" data-youtube-id="HG26dhG3zxQ">
+                <div class="news-card-thumb">
+                    <img src="./Genshin.img/Thong_bao 2.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">THÔNG TIN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>[Genshin Impact] Video Kỷ Niệm Mạo Hiểm Teyvat: Thư Kỷ Niệm Sáu Năm Hành Trình</h3>
+                    <p>Từ làn gió nhẹ thổi qua Mondstadt, đến Lửa Thánh thiêu đốt ở Natlan; Rồi đến vùng đất phương Bắc nơi ánh trăng chiếu rọi, hành trình của chúng ta đã trải qua sáu năm.</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 28/09/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thông tin 5-->
+            <div class="news-page-card" data-category="thong-tin" data-youtube-id="RDntcyVm9eb">
+                <div class="news-card-thumb">
+                    <img src="./Genshin.img/Thong_bao 3.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">THÔNG TIN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>[Genshin Impact] Ca Khúc Chủ Đề Kỷ Niệm 6 Năm "A Letter from the Wind"</h3>
+                    <p>Hnh trình có bạn, đong đầy ý nghĩa.</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 28/09/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thông tin 6-->
+            <div class="news-page-card" data-category="thong-tin">
+                <div class="news-card-thumb">
+                    <img src="./Genshin_News.img/Thong_tin6.jpg" alt="Tin tức Genshin">
+                    <span class="news-card-tag">THÔNG TIN</span>
+                </div>
+                <div class="news-card-body">
+                    <h3>Thông Báo Sự Kiện Cầu Nguyện Phiên Bản 7.1 Kỳ 1</h3>
+                    <p>Trong thời gian sự kiện, Nhà Lữ Hành có thể nhận thêm vũ khí và nhân vật trong sự kiện cầu nguyện để tăng khả năng chiến đấu của đội!</p>
+                    <div class="news-card-footer">
+                        <span class="news-card-date"><i class="fa-regular fa-calendar"></i> 21/09/2026 </span>
+                        <a href="#" class="news-read-more">Xem chi tiết &rarr;</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load-more-wrapper">
+        <button id="loadMoreBtn" class="load-more-btn">Tải Thêm</button>
+    </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========================================================== -->
+<!-- TRANG CHI TIẾT TIN TỨC (MẶC ĐỊNH ẨN, BẤM XEM CHI TIẾT MỚI HIỆN) -->
+<!-- ========================================================== -->
+<section id="news-detail-page" class="page-section">
+    <div class="news-detail-container">
+
+        <!-- Thanh Điều Hướng Trên Cùng (Breadcrumb & Nút Trở Về) -->
+        <div class="news-detail-nav-bar">
+            <div class="news-breadcrumb">
+                <a href="#" id="breadcrumbHome">Trang Chủ</a> &gt; 
+                <a href="#" id="breadcrumbNews">Tin Tức</a> &gt; 
+                <span id="detailCategoryTag">Thông tin</span> &gt; 
+                <span id="detailBreadcrumbTitle">[Genshin Impact] Hoạt Cảnh - Dấu Ấn Sự Sống</span>
+            </div>
+            <a href="#" id="backToNewsBtn" class="back-to-news-link">&larr; Trở Về Tin Tức</a>
+        </div>
+
+        <!-- BỐ CỤC 2 CỘT CHUẨN GENSHIN IMPACT -->
+        <div class="news-detail-layout">
+
+            <!-- CỘT TRÁI (LỚN): NỘI DUNG CHÍNH BÀI VIẾT -->
+            <div class="news-detail-main-card">
+                <h1 id="detailTitle" class="detail-main-title">[Genshin Impact] Hoạt Cảnh - Dấu Ấn Sự Sống</h1>
+                <div class="detail-meta-time">
+                    Thời Gian Đăng <span id="detailDate">06/10/2026</span>
+                </div>
+
+                <div id="detailBodyContent" class="detail-body-content">
+                    <!-- Ảnh Banner Bài Viết -->
+                    <div class="detail-image-box">
+                        <img id="detailBannerImg" src="./Genshin_News.img/Thong_tin1.jpg" alt="Ảnh chi tiết">
+                    </div>
+
+                    <!-- Nội Dung Văn Bản Bài Viết -->
+                    <p id="detailDescText">
+                        Trong một số truyền thuyết, sinh vật một sừng tượng trưng cho sự cao ngạo và thuần khiết. Nhưng đừng quên rằng, nó cũng vô cùng khó thuần phục như chính sinh mệnh vậy.
+                    </p>
+
+                    <!-- Khung Video Thumbnail bấm là chuyển sang trang YouTube -->
+                <div id="detailVideoWrapper" class="detail-video-box">
+                    <a id="detailVideoLink" href="https://www.youtube.com/watch?v=rEoZ_t5oBmQ" target="_blank" class="video-thumb-wrapper">
+                    <img id="detailVideoThumb" src="https://img.youtube.com/vi/rEoZ_t5oBmQ/maxresdefault.jpg" class="video-thumb" alt="Video Chi Tiết" />
+                <div class="play-btn">▶</div>
+                    </a>
+                </div>
+
+                </div>
+            </div>
+
+            <!-- CỘT PHẢI (NHỎ): DANH SÁCH BÀI BÁO MỚI (SIDEBAR) -->
+            <div class="news-detail-sidebar-card">
+                <h3 class="sidebar-title">Mới</h3>
+                <div class="sidebar-news-list">
+
+        <div class="sidebar-news-item" data-desc="Trong một số truyền thuyết, sinh vật một sừng tượng trưng cho sự cao ngạo và thuần khiết. Nhưng đừng quên rằng, nó cũng vô cùng khó thuần phục như chính sinh mệnh vậy." 
+        data-youtube-id="rEoZ_t5oBmQ">
+            <img src="./Genshin_News.img/Thong_tin1.jpg" alt="Bài mới">
+        <div class="sidebar-news-info">
+            <h4>[Genshin Impact] Hoạt Cảnh - Dấu Ấn Sự Sống</h4>
+            <span>06/10/2026</span>
+        </div>
+        </div>
+
+        <div class="sidebar-news-item" data-desc="Nhà Lữ Hành thân mến, sự kiện Genshin Impact v7.0 trên Discord Quest đã chính thức ra mắt với nhiều phần thưởng Nguyên Thạch hấp dẫn!">
+            <img src="./Genshin_News.img/Thong_tin2.jpg" alt="Bài mới">
+        <div class="sidebar-news-info">
+            <h4>Genshin Impact - Discord Quest Phiên Bản 7.0</h4>
+            <span>13/08/2026</span>
+        </div>
+        </div>
+
+        <div class="sidebar-news-item" data-desc="Biết đi về phương nào, cánh én nào lẻ bóng. Biết nơi đâu gặp lại, đèn bạc mãi sáng soi. Tình mộng, trăm ngọc chia đôi..."
+        data-youtube-id="9wwm86um-UU">
+            <img src="./Genshin.img/Thong_bao 4.jpg" alt="Bài mới">
+        <div class="sidebar-news-info">
+            <h4>Video Cốt Truyện Genshin Impact - Cánh Én Trở Về</h4>
+            <span>02/10/2026</span>
+        </div>
+        </div>
+
+        <div class="sidebar-news-item" data-desc="Nhà Lữ Hành thân mến: Dưới đây là nội dung cập nhật và đền bù của phiên bản 7.1 - Khúc An Hồn Cõi Âm"
+        data-youtube-id="EwWbahV3qmU">
+            <img src="./Genshin.img/New_bg2.jpg" alt="Bài mới">
+        <div class="sidebar-news-info">
+            <h4>[Genshin Impact] Video Giới Thiệu Phiên Bản 7.1: "Khúc An Hồn Cõi Âm"</h4>
+            <span>12/09/2026</span>
+        </div>
+        </div>
+
+            </div>
+            </div>
+
+            </div>
+        </div> <!-- Đóng news-detail-layout -->
+
+    </div>
+</section>
+
+    <!-- ========================================================== -->
+<!-- III. TRANG GIỚI THIỆU GAME (GAME INTRO PAGE)                    -->
+<!-- ========================================================== -->
+<section id="game-intro-page" class="page-section">
+    
+    <!-- 1. HERO BANNER POSTER -->
+    <div class="game-intro-hero">
+        <video autoplay loop muted playsinline class="hero-video-bg">
+            <source src="./Genshin.mp4/background 7.mp4" type="video/mp4">
+        </video>
+        <div class="hero-poster-text">
+            <h1>Đồng Loạt Ra Mắt Toàn Cầu Trên Nhiều Nền Tảng</h1>
+            <p>9:00 28/09/2020 (GMT+7)</p>
+        </div>
+    </div>
+</div> <!-- Kết thúc .game-intro-hero -->
+
+    <div class="game-features-wrapper">
+
+        <!-- 2. KHỐI TÍNH NĂNG ĐẶC SẮC -->
+    <!-- 2. KHỐI TÍNH NĂNG ĐẶC SẮC -->
+    <div class="game-features-container">
+        <h2 class="section-title-center">Tính năng đặc sắc</h2>
+
+        <!-- Thẻ 1: Sử thi -->
+        <div class="feature-card">
+            <div class="feature-scroll-box">
+                <h3>Cuộc phiêu lưu giả tưởng đậm chất sử thi</h3>
+                <p>Trải nghiệm cảm giác mạo hiểm cá nhân. Trong vai trò là Nhà Lữ Hành đến từ thế giới khác, bạn bước vào hành trình tìm lại chính mình và người thân mất tích.</p>
+            </div>
+            <div class="feature-img-box">
+                <img src="./Gioi_Thieu_game.img/Gioi_thieu_game1.png" alt="Cuộc phiêu lưu giả tưởng">
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-scroll-box">
+                <h3>Khám phá thế giới của riêng bạn</h3>
+                <p>Bay qua đại lục rộng lớn, vẫy vùng cùng sóng nước, vượt qua núi non trùng điệp. Đặt chân đến những nơi vắng bóng người, khám phá hết thảy những điều kỳ bí đang ẩn giấu trong thế giới tràn đầy kỳ tích này.</p>
+            </div>
+            <div class="feature-img-box">
+                <img src="./Gioi_Thieu_game.img/Gioi_thieu_game2.png" alt="Khám phá cùng nhau">
+            </div>
+        </div>
+
+        <!-- Thẻ 2: Co-op chiến đấu -->
+        <div class="feature-card">
+            <div class="feature-scroll-box">
+                <h3>Khám phá một mình hoặc cùng nhau chiến đấu</h3>
+                <p>Không chỉ có thể chiến đấu một mình, còn có thể mời bạn bè. Bất kể từ nền tảng PC, iOS, Android, PS và Xbox đều có thể liên kết đa nền tảng để khiêu chiến kẻ địch mạnh hơn.</p>
+            </div>
+            <div class="feature-img-box">
+                <img src="./Gioi_Thieu_game.img/Gioi_thieu_game4.png" alt="Khám phá cùng nhau">
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-scroll-box">
+                <h3>Điều khiển bảy loại nguyên tố</h3>
+                <p>Không đơn giản là game chiến đấu thông thường, trong thế giới mở của Genshin Impact, bạn có thể linh hoạt, khéo léo sử dụng sức mạnh nguyên tố đánh bại cường địch và giải mã những câu đố phức tạp.</p>
+            </div>
+            <div class="feature-img-box">
+                <img src="./Gioi_Thieu_game.img/Gioi_thieu_game3.png" alt="Xây dựng đội ngũ">
+            </div>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-scroll-box">
+                <h3>Xây dựng đội ngũ của riêng mình</h3>
+                <p>Chọn người đồng hành cùng bạn. Với hơn 20 nhân vật cùng những sức mạnh, cá tính và phong cách chiến đấu riêng biệt, hãy chọn thành viên phù hợp với đội hình của bạn.</p>
+            </div>
+            <div class="feature-img-box">
+                <img src="./Gioi_Thieu_game.img/Gioi_thieu_game5.png" alt="Xây dựng đội ngũ">
+            </div>
+        </div>
+
+        <!-- Nút chuyển sang trang Nhân Vật -->
+        <div class="view-characters-btn-wrapper">
+            <button id="btnGoToCharacters" class="btn-yellow-large">Xem Nhân Vật</button>
+        </div>
+    </div>
+
+    <!-- 3. KHỐI ĐỒ HỌA (SLIDER) -->
+    <div class="game-graphics-container">
+        <h2 class="section-title-center">Đồ Họa</h2>
+        
+        <div class="graphics-slider">
+            <button class="slider-arrow arrow-left" id="graphicsPrevBtn">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            
+            <div class="graphics-slide-wrapper">
+                <img src="./Gioi_Thieu_game.img/Do_hoa1.png" id="graphicsCurrentImg" alt="Đồ họa Genshin Impact">
+            </div>
+
+            <button class="slider-arrow arrow-right" id="graphicsNextBtn">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+    </div>
+</div>
+</section>
+
+<!-- ==========================================================
+     IV. TRANG NHÂN VẬT CHUẨN GENSIN IMPACT (CHARACTERS PAGE)
+     ========================================================== -->
+<section id="characters-page" class="page-section">
+    <div class="characters-container">
+
+        <!-- 1. THANH ĐIỀU HƯỚNG QUỐC GIA (BÊN TRÁI) -->
+        <aside class="nations-sidebar">
+            <ul class="nation-nav-list">
+                <li class="nation-nav-item active" data-region="mondstadt">
+                    <span class="diamond-icon">◆</span> Mondstadt
+                </li>
+                <li class="nation-nav-item" data-region="liyue">
+                    <span class="diamond-icon">◆</span> Liyue
+                </li>
+                <li class="nation-nav-item" data-region="inazuma">
+                    <span class="diamond-icon">◆</span> Inazuma
+                </li>
+                <li class="nation-nav-item" data-region="sumeru">
+                    <span class="diamond-icon">◆</span> Sumeru
+                </li>
+                <li class="nation-nav-item" data-region="fontaine">
+                    <span class="diamond-icon">◆</span> Fontaine
+                </li>
+                <li class="nation-nav-item" data-region="natlan">
+                    <span class="diamond-icon">◆</span> Natlan
+                </li>
+                <li class="nation-nav-item" data-region="snezhnaya">
+                    <span class="diamond-icon">◆</span> Snezhnaya
+                </li>
+            </ul>
+        </aside>
+
+        <!-- 2. KHU VỰC HIỂN THỊ CHÍNH NHÂN VẬT -->
+        <main class="character-main-content">
+            
+            <!-- Khung thông tin chữ & Ảnh Splash Art -->
+            <div class="character-display-box">
+                
+                <!-- Bảng tên & Tiểu sử bên trái -->
+                <div class="character-info-card">
+                    <h1 id="charName">JEAN</h1>
+                    <div class="char-title-line"></div>
+                    <div class="char-description-box">
+                        <p id="charDesc">
+                            Là quyền đội trưởng của Đội Kỵ Sĩ Tây Phong, Jean luôn cần mẫn làm việc, đem lại sự yên bình cho người dân. Tuy rằng không có tài năng thiên phú vượt bậc, nhưng nhờ chăm chỉ luyện tập, hiện nay cô ấy không thua kém ai.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Ảnh minh họa toàn thân bên phải -->
+                <div class="character-splash-box">
+                    <img id="charSplashImg" src="./Genshin.img/Venti_Monstard.png" alt="Nhân vật Genshin Impact">
+                </div>
+
+            </div>
+
+            <!-- 3. THANH CHỌN AVATAR NHÂN VẬT (TRƯỢT Ở ĐÁY) -->
+            <div class="character-avatar-bar">
+                <button class="avatar-arrow arrow-left" id="charPrevAvatarBtn">
+                    <i class="fa-solid fa-chevron-left"></i>
+                </button>
+
+                <div class="avatar-list-wrapper" id="avatarListContainer">
+                    <!-- Javascript sẽ tự động thay đổi 3 avatar theo quốc gia được chọn -->
+                    <div class="char-avatar-card active" data-char-id="0">
+                        <img src="./Genshin.img/Venti_Monstard.png" alt="Avatar 1">
+                    </div>
+                    <div class="char-avatar-card" data-char-id="1">
+                        <img src="./Genshin.img/Venti_Monstard.png" alt="Avatar 2">
+                    </div>
+                    <div class="char-avatar-card" data-char-id="2">
+                        <img src="./Genshin.img/Venti_Monstard.png" alt="Avatar 3">
+                    </div>
+                </div>
+
+                <button class="avatar-arrow arrow-right" id="charNextAvatarBtn">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+
+        </main>
+
+    </div>
+</section>
+
+<!-- ==========================================
+         V. KHU VỰC VIDEO GIẢI TRÍ (VIDEO SECTION)
+    =========================================== -->
+<section id="video-page" class="page-section" style="display: none;">
+ 
+    <video autoplay muted loop playsinline class="video-bg">
+        <source src="./Genshin.mp4/Background 8.mp4" type="video/mp4">
+    </video>
+
+    <div class="video-bg-overlay"></div>
+
+    <div class="section-title">
+        <h2>THƯ VIỆN VIDEO</h2>
+        <div class="title-line"></div>
+    </div>
+
+    <div class="video-grid">
+
+        <!-- VIDEO 1 (YouTube) -->
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=T5-YMslEmxw" target="_blank" class="video-thumb-wrapper">
+                <img src="https://img.youtube.com/vi/T5-YMslEmxw/maxresdefault.jpg" class="video-thumb" alt="Video 1" />
+                <div class="play-btn">▶</div>
+            </a>
+            <h3>[Genshin Impact] Hoạt Hình Ngắn "Con Đường Chưa Đi"</h3>
+        </div>
+
+        <!-- VIDEO 2 (YouTube) -->
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=SO__VQZirJ4" target="_blank" class="video-thumb-wrapper">
+                <img src="https://img.youtube.com/vi/SO__VQZirJ4/maxresdefault.jpg" class="video-thumb" alt="Video 2" />
+                <div class="play-btn">▶</div>
+            </a>
+            <h3> Giới thiệu cốt truyện Genshin Impact: Chúng ta rồi sẽ gặp lại </h3>
+        </div>
+
+        <!-- VIDEO 3 (YouTube) -->
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=DFZcl2vTtm8" target="_blank" class="video-thumb-wrapper">
+                <img src="https://img.youtube.com/vi/DFZcl2vTtm8/maxresdefault.jpg" class="video-thumb" alt="Video 3" />
+                <div class="play-btn">▶</div>
+            </a>
+            <h3> Video Cốt Truyện Genshin Impact - Changsheng</h3>
+        </div>
+
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=_qTNkcy_7Y4" target="_blank" class="video-thumb-wrapper">
+                <img src="https://img.youtube.com/vi/_qTNkcy_7Y4/maxresdefault.jpg" class="video-thumb" alt="Video 4" />
+                <div class="play-btn">▶</div>
+            </a>
+            <h3> [Genshin Impact] Video - Độc Hành Đuổi Theo Ánh Chớp</h3>
+        </div>
+
+        <!-- VIDEO 4 (YouTube) -->
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=9wwm86um-UU" target="_blank" class="video-thumb-wrapper">
+                <img src="https://img.youtube.com/vi/9wwm86um-UU/maxresdefault.jpg" class="video-thumb" alt="Video 5" />
+                <div class="play-btn">▶</div>
+            </a>
+            <h3> Video Cốt Truyện Genshin Impact - Cánh Én Trở Về </h3>
+        </div>
+
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=CTWxnQawAqE" target="_blank" class="video-thumb-wrapper">
+                <img src="https://img.youtube.com/vi/CTWxnQawAqE/maxresdefault.jpg" class="video-thumb" alt="Video 6" />
+                <div class="play-btn">▶</div>
+            </a>
+            <h3> Video Cốt Truyện Genshin Impact - Akitsu Haneasobi </h3>
+        </div>
+
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=d1OANwZ29ww" target="_blank" class="video-thumb-wrapper">
+                <img src="https://img.youtube.com/vi/d1OANwZ29ww/maxresdefault.jpg" class="video-thumb" alt="Video 7" />
+                <div class="play-btn">▶</div>
+            </a>
+            <h3> Video Cốt Truyện Genshin Impact - Dư Âm Trong Tim </h3>
+        </div>
+
+        <div class="video-card">
+            <a href="https://www.youtube.com/watch?v=ZVnfjTVZrWY" target="_blank" class="video-thumb-wrapper">
+                <img src="https://img.youtube.com/vi/ZVnfjTVZrWY/maxresdefault.jpg" class="video-thumb" alt="Video 8" />
+                <div class="play-btn">▶</div>
+            </a>
+            <h3> Video cốt truyện Genshin Impact - Chỉ Còn Là Kỷ Niệm </h3>
+        </div>
+
+    </div>
+</section>
+
+ <!-- ==========================================
+         VI. KHU VỰC MÃ QUÀ & TRUNG TÂM NẠP
+    =========================================== -->
+<section id="gift-page" class="page-section" style="display: none;">
+<!-- 🟢 TIÊU ĐỀ DÙNG CHUNG CẤU TRÚC VỚI THƯ VIỆN VIDEO -->
+    <div class="section-title">
+        <h2>MÃ QUÀ (GIFCODE)</h2>
+        <div class="title-line"></div>
+    </div>
+    <!-- Khung màu trắng đặt ở chính giữa trang -->
+    <div class="gift-box">
+        <h2 class="gift-title">DANH SÁCH MÃ QUÀ</h2>
+        <p class="gift-subtitle">Sao chép các mã quà dưới đây và bấm nút nhận thưởng để đổi quà ngay!</p>
+
+        <!-- Danh sách các ô mã quà (Hình thức ô được giữ nguyên & làm nét) -->
+        <div class="gift-code-list">
+
+            <!-- Ô MÃ QUÀ 1 -->
+            <div class="gift-code-card">
+                <div class="code-info">
+                    <span class="code-text">OPERACOLLAB</span>
+                    <span class="code-reward">✦ 30 Nguyên Thạch + 2 Kinh Nghiệm Anh Hùng + 20.000 Mora</span>
+                </div>
+            </div>
+
+            <!-- Ô MÃ QUÀ 2 -->
+            <div class="gift-code-card">
+                <div class="code-info">
+                    <span class="code-text"> VesnaOnPatrol</span>
+                    <span class="code-reward">✦ 40 Nguyên Thạch + 20.000 Mora + 5 Kinh Nghiệm Anh Hùng</span>
+                </div>
+            </div>
+
+            <!-- Ô MÃ QUÀ 3 -->
+            <div class="gift-code-card">
+                <div class="code-info">
+                    <span class="code-text"> EPIC2026 </span>
+                    <span class="code-reward">✦ 40 Nguyên Thạch + 5 Ma Khoáng Tinh Luyện</span>
+                </div>
+            </div>
+
+            <div class="gift-code-card">
+                <div class="code-info">
+                    <span class="code-text"> YOAL3V36XHS7 </span>
+                    <span class="code-reward">✦ 60 Nguyên Thạch + 20 Ma Khoáng Tinh Luyện</span>
+                </div>
+            </div>
+
+            <div class="gift-code-card">
+                <div class="code-info">
+                    <span class="code-text">HOYOVERSE71GIFT</span>
+                    <span class="code-reward">✦ 100 Nguyên Thạch + 5 Ma Khoáng Tinh Luyện</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Nút bấm ở cuối khung trắng dẫn tới trang đổi giftcode chính thức -->
+        <div class="gift-action">
+            <a href="https://genshin.hoyoverse.com/vi/gift" target="_blank" class="btn-redeem-link">
+                <i class="fa-solid fa-gift"></i> Nhập giftcode tại đây
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ==========================================
+         7. TRÌNH PHÁT NHẠC CỐ ĐỊNH (FLOATING AUDIO PLAYER)
+    =========================================== -->
+    <div class="floating-audio-player" id="audioPlayerContainer">
+      <!-- 📌 [GHI CHÚ SINH VIÊN]: Đổi đường dẫn bài hát MP3 bạn thích ở thẻ <audio> -->
+      <audio
+    id="bgMusic"
+    loop
+    src="Genshin.audio/A Distant Farewell.mp3"
+></audio>
+
+      <div class="player-icon" id="playerToggleBtn">
+        <i class="fa-solid fa-music"></i>
+      </div>
+
+      <div class="player-controls">
+        <div class="track-info">
+          <span class="track-title"> A Distant Farewell - Genshin Impact</span>
+          <span class="track-artist">HOYO-MiX</span>
+        </div>
+        <button id="playPauseBtn"><i class="fa-solid fa-play"></i></button>
+      </div>
+    </div>
+
+    <!-- ==========================================
+         8. FOOTER & THÔNG TIN BÀI TẬP NHÓM
+    =========================================== -->
+    <!-- FOOTER HOYOVERSE CHUẨN (ĐÃ LƯỢC BỎ FUNAP) -->
+<footer class="site-footer">
+
+    <!-- 1. THANH MẠNG XÃ HỘI (SOCIAL BAR) -->
+    <div class="footer-social-bar">
+        <div class="social-icons">
+            <a href="https://x.com/GenshinImpact" target="_blank" title="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="https://www.tiktok.com/@genshin_impact_vn" target="_blank" title="TikTok"><i class="fa-brands fa-tiktok"></i></a>
+            <a href="https://www.youtube.com/@GenshinImpact" target="_blank" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="https://www.facebook.com/GenshinImpact.vi" target="_blank" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/genshinimpact/" target="_blank" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://discord.com/invite/genshinimpact" target="_blank" title="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://www.reddit.com/r/Genshin_Impact/" target="_blank" title="Reddit"><i class="fa-brands fa-reddit-alien"></i></a>
+            <a href="https://www.twitch.tv/genshinimpactofficial" target="_blank" title="Twitch"><i class="fa-brands fa-twitch"></i></a>
+        </div>
+    </div>
+
+    <!-- 2. KHU VỰC ĐĂNG KÝ NHẬN THÔNG TIN (SUBSCRIBE) -->
+    <div class="footer-subscribe-section">
+        <div class="subscribe-container">
+            <div class="subscribe-text">
+                <h3>Theo Dõi Thông Tin Mới Nhất</h3>
+                <p>Theo dõi thông tin chính thức của Genshin Impact, cập nhật những tin tức mới nhất, thông tin nhân vật và phúc lợi sự kiện hạn giờ từ Paimon.</p>
+                <p>(Đây là sản phẩm học thuật và không sử dụng với mục đích kinh doanh hay bất cứ hình thức buốn bán nào khác)</p>
+            </div>
+            <div class="subscribe-form-wrapper">
+                <form id="subscribe-form" class="subscribe-form">
+    <input type="hidden" name="access_key" value="940986ed-0914-4b60-bf3e-67464e4a8e24">
+    
+    <div class="input-group">
+        <input type="email" id="email-input" name="email" placeholder="Email" required />
+        <button type="submit" id="btn-subscribe" class="btn-subscribe">Theo Dõi Ngay</button>
+    </div>
+    
+    <label class="subscribe-policy">
+        <input type="checkbox" required />
+        <span>Đã đồng ý thu thập và sử dụng dữ liệu cá nhân để nhận lời mời sự kiện</span>
+    </label>
+</form>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. PHẦN CHÂN TRANG CHÍNH (MAIN FOOTER) -->
+    <div class="footer-main">
+        <div class="footer-brand">
+            <img src="./Genshin.img/no-bg.png" alt="Genshin Impact Logo" class="footer-logo" />
+        </div>
+        
+        <div class="footer-policy-links">
+            <a href="https://funtap.games/vi/terms-of-use" target="_blank">Điều Khoản</a>
+            <span class="divider">|</span>
+            <a href="https://funtap.games/vi/security" target="_blank">Bảo Mật</a>
+        </div>
+
+        <div class="footer-copyright"> </div>
+
+</footer>
+
+    <!-- Link file JS (Sẽ thêm vào ở các bước sau) -->
+    <script src="script.js"></script>
+    
+  </body>
+</html>
